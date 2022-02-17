@@ -28,7 +28,7 @@ The third notebook contains the dimenion reduction step, as well as the experime
 Thomas MIRAS</br>
 Mariella DE CROUY CHANEL</br>
 Landry TAYAYA</br>
-### Mentors from Datascientest.com team
+## Our mentors from Datascientest.com
 Thibault</br>
 Emilie</br>
 Antoine
