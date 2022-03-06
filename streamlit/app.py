@@ -11,7 +11,7 @@ from pages import (
 app = MultiPage()
 
 # Title of the main page
-st.title("Bookmakerspy - Paris sportifs / Promo FC Juin 2021")
+# st.title("Bookmakerspy")
 
 # Add all your application here
 app.add_page("1. Données & pre-processing", donnees_preprocessing.app)

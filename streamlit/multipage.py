@@ -28,7 +28,7 @@ class MultiPage:
     def run(self):
         # Drodown to select the page to run
         page = st.sidebar.selectbox(
-            "Navigation présentation",
+            "Navigation",
             self.pages,
             format_func=lambda page: page["title"],
         )
