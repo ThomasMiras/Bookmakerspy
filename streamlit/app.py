@@ -14,8 +14,8 @@ app = MultiPage()
 # st.title("Bookmakerspy")
 
 # Add all your application here
-app.add_page("1. Données & pre-processing", donnees_preprocessing.app)
-app.add_page("2. Exploration & dataviz", exploration_dataviz.app)
+app.add_page('1. Données & pre-processing', donnees_preprocessing.app)
+app.add_page('2. Exploration & dataviz', exploration_dataviz.app)
 
 # The main app
 app.run()
