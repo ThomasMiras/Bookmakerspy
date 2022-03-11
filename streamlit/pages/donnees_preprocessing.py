@@ -34,21 +34,30 @@ def app():
     df_position_home_rating = pd.read_csv('./data/df_position_home_rating.csv')
     st.dataframe(df_position_home_rating)
 
+    st.caption("Dataframe cotes")
+    df_odds = pd.read_csv('./data/df_odds.csv')
+    st.dataframe(df_odds)
+
     st.subheader("Pre-processing")
     
     st.caption("Jointures")
-    img_jointures = Image.open('./data/img/columns_merge.png')
+    img_jointures = Image.open('./data/img/jointures_df.png')
     st.image(img_jointures)
 
     st.caption("Traitement des valeurs manquantes")
     st.write("Données de match: valeurs manquantes considérées comme absence d'événement (0)")
     st.write("Données joueurs: les joueurs non notés (0) n'ont pas été pris en compte pour calculer les moyennes par position.")
 
-    st.caption("suppression de variables")
-    
-    st.caption("Regroupements de variables")
+    st.caption("Suppression de variables")
+    img_supp = Image.open('./data/img/suppression_variables.png')
+    st.image(img_supp)
 
+    st.caption("Regroupements de variables")
+    st.write("home/away pass: ratio entre home/away accurate pass et home/away total pass")
+    
     st.caption("Création de variables")
+    st.write("Différences entre les notes joueurs home et away")
+    st.write("Différences entre le nombre de goals home et away")
 
 
 
