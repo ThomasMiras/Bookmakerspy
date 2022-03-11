@@ -42,8 +42,10 @@ def app():
 
     st.caption("Traitement des valeurs manquantes")
     st.write("Données de match: valeurs manquantes considérées comme absence d'événement (0)")
-    st.write("Données joueurs: valeurs manquantes considérées comme absence d'événement (0)")
+    st.write("Données joueurs: les joueurs non notés (0) n'ont pas été pris en compte pour calculer les moyennes par position.")
 
+    st.caption("suppression de variables")
+    
     st.caption("Regroupements de variables")
 
     st.caption("Création de variables")
