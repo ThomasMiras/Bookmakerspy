@@ -16,9 +16,9 @@ app = MultiPage()
 # Add all your application here
 app.add_page("1. Données & pre-processing", donnees_preprocessing.app)
 app.add_page("2. Exploration & dataviz", exploration_dataviz.app)
+app.add_page("4. Réduction de dimension", reduction_dimension.app)
+app.add_page("5. Modèles de Machine Learning", modeles_ML.app)
+app.add_page("6. Stratégie de paris", strategie_paris.app)
 
-app.add_page("4. Réduction de dimension", exploration_dataviz.app)
-app.add_page("5. Modèles de Machine Learning", exploration_dataviz.app)
-app.add_page("6. Stratégie de paris", exploration_dataviz.app)
 # The main app
 app.run()
