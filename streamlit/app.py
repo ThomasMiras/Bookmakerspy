@@ -16,7 +16,7 @@ app = MultiPage()
 # Add all your application here
 app.add_page("1. Données & pre-processing", donnees_preprocessing.app)
 app.add_page("2. Exploration & dataviz", exploration_dataviz.app)
-app.add_page("3. Modélisation par un modèle de Poisson", poisson_modelisation.app)
+app.add_page("3. Simulation par un modèle de Poisson", poisson_modelisation.app)
 
 # The main app
 app.run()
