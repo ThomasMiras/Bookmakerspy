@@ -61,8 +61,8 @@ def app():
     st.dataframe(params.style.set_table_styles([index_names, headers, grid]).format("{:20,.5f}"))
     
     
-    df = pd.DataFrame([[1, 0, 1, 1, 1], 
-                  [1, 1, 0, 0, 2], 
+    df = pd.DataFrame([['1', '0', '1', '1', '1'], 
+                  ['1', '1', '0', '0', '2'], 
                   ['D', 'A', 'H', 'H', 'A']], 
                   index = ["Chelsea", "Liverpool", "Result"],
                   columns = pd.Index(['Match 1', 'Match 2', 'Match 3', 'Match 4', 'Match 5'], name = 'Model'))
