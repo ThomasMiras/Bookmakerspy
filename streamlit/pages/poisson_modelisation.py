@@ -4,6 +4,9 @@ import seaborn as sns
 import streamlit as st
 import matplotlib.pyplot as plt
 
+import os
+os.chdir('C:/Users/LANDRYGOL/Documents/GitHub/Bookmakerspy/streamlit')
+
 sns.set_theme(style="white")
 sns.set_palette("pastel")
 
