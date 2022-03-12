@@ -8,5 +8,5 @@ sns.set_palette("pastel")
 
 def app():
 
-    st.header("Bookmakerspy - Modélisation ")
+    st.header("Bookmakerspy - Simulation par un modèle de Poisson")
     st.subheader("Rappels sur le nombre de buts par match")
