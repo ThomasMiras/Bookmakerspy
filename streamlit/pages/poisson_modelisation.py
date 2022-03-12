@@ -20,10 +20,10 @@ def app():
     st.subheader("Rappels sur le nombre de buts par match")
     
     st.dataframe(df)
-    fig, g = plt.figure(figsize=(8, 6))
+    fig = plt.figure(figsize=(5, 5))
     g = sns.histplot(data = df, x = 'total_goal', bins = 10, hue = 'season', kde = True, stat = 'density', multiple = 'dodge');
     g.set_xticks(range(10))
-    st.pyplot(g)
+    st.pyplot(fig)
     
     
     #fig, (g1, g2) = plt.subplots(1, 2)
