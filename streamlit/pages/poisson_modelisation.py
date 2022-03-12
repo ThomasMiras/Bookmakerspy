@@ -67,4 +67,4 @@ def app():
                   index = ["Chelsea", "Liverpool", "Result"],
                   columns = pd.Index(['Match 1', 'Match 2', 'Match 3', 'Match 4', 'Match 5'], name = 'Model'))
 
-    df.style.apply(lambda x: ['border: 1px solid black; text-align: center; background-color: #add8e6;' if v =='H' else 'border: 1px solid black; text-align: center; background-color: #90ee90;' if v == 'D' else 'border: 1px solid black; text-align: center; background-color: #ffcccb;' if v == 'A' else 'border: 1px solid black; text-align: center; background-color: #ffffff;' for v in x])
+    st.dataframe(df.style.apply(lambda x: ['border: 1px solid black; text-align: center; background-color: #add8e6;' if v =='H' else 'border: 1px solid black; text-align: center; background-color: #90ee90;' if v == 'D' else 'border: 1px solid black; text-align: center; background-color: #ffcccb;' if v == 'A' else 'border: 1px solid black; text-align: center; background-color: #ffffff;' for v in x]))
