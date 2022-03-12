@@ -30,7 +30,7 @@ class MultiPage:
         page = st.sidebar.radio(
             "Navigation",
             self.pages,
-            format_func=lambda page: page["title"],
+            format_func=lambda page: page['title']
         )
 
         # run the app function

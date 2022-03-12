@@ -59,6 +59,9 @@ def app():
     st.write("Différences entre les notes joueurs home et away")
     st.write("Différences entre le nombre de goals home et away")
 
+    st.caption("Moyennes des 3 derniers matchs")
+    st.write("Moyennes effectuées sur les stats pour chaque équipe sur les 3 derniers matchs où une équipe a joué dans la même situation (home/away)")
+
 
 
     
