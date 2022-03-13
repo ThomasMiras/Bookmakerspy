@@ -31,10 +31,6 @@ def app():
     st.pyplot(fig)
     
     
-    index_names = {'selector': '.index_name','props': 'color: white; background-color: #ffffff;'}
-    headers = {'selector': 'th:not(.index_name)','props': 'border: 1px solid black; text-align: center; background-color: #d9d9d9;'}
-    grid = {'selector': 'td', 'props': 'border: 1px solid black; text-align: center; background-color: #ffffff;'}
-
     coeffs = pd.DataFrame([[-0.0074, 0.0099, -0.5456, 0.0085, 0.1875, 0.0175, 0.0240, -0.1687, -0.0200, 0.1342],
                           [-0.0033, 0.0101, -2.0334, 0.0279, -0.2725, 0.0350, 0.0446, 0.1306, 0.1001, 0.0300]],
                           index = ["Home", "Away"],
@@ -42,7 +38,7 @@ def app():
                                               'possession_percentage', 'team_rating', 'won_contest', 'won_corners', 
                                               'midfielder_player_rating', 'forward_player_rating', 'FTG_mean'], name = 'Model'))
     
-    st.dataframe(coeffs.style.set_table_styles([index_names, headers, grid]).format("{:20,.4f}"))
+    st.dataframe(coeffs.style.format("{:20,.4f}"))
     
     
     features = pd.DataFrame([[19.33333, 7, 0.83112, 56.83333, 6.85429, 14.33333, 9, 6.93083, 7.68778, 1.33333],
@@ -52,13 +48,13 @@ def app():
                                                 'possession_percentage', 'team_rating', 'won_contest', 'won_corners', 
                                                 'midfielder_player_rating', 'forward_player_rating', 'FTG_mean'], name = 'Model'))
     
-    st.dataframe(features.style.set_table_styles([index_names, headers, grid]).format("{:20,.5f}"))
+    st.dataframe(features.style.format("{:20,.5f}"))
     
     
     params = pd.DataFrame(index = ["Chelsea", "Liverpool"], columns = pd.Index(['λ'], name = 'Model'))
     params['λ'] = list(np.exp(np.sum(np.multiply(coeffs, features), axis = 1)))
     
-    st.dataframe(params.style.set_table_styles([index_names, headers, grid]).format("{:20,.5f}"))
+    st.dataframe(params.style.format("{:20,.5f}"))
     
     
     df = pd.DataFrame([['1', '0', '1', '1', '1'], 
@@ -68,3 +64,16 @@ def app():
                       columns = pd.Index(['Match 1', 'Match 2', 'Match 3', 'Match 4', 'Match 5'], name = 'Model'))
 
     st.dataframe(df.style.apply(lambda x: ['background-color: #add8e6;' if v =='H' else 'background-color: #90ee90;' if v == 'D' else 'background-color: #ffcccb;' if v == 'A' else 'background-color: #ffffff;' for v in x]))
+    
+    
+    nb_simu = 10000
+    match = {i: pd.DataFrame(columns = range(nb_simu)) for i in ['home', 'away']}
+    s = pd.DataFrame(columns = pd.MultiIndex.from_product([['Away'], list(np.arange(9))]), index = pd.MultiIndex.from_product([['Home'], list(np.arange(9))]))
+
+    match['home'] = np.random.poisson(params['λ'][0], nb_simu)
+    match['away'] = np.random.poisson(params['λ'][1], nb_simu)
+
+    for i in range(9):
+      for j in range(9):
+        s[('Away', i)][('Home', j)] = 100 * sum([1 if (u == i) & (v == j) else 0 for (u, v) in zip (match['home'], match['away'])])
+    s = s / nb_simu
