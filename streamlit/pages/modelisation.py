@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
+from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import confusion_matrix
@@ -12,8 +13,10 @@ from sklearn.metrics import classification_report
 def app():
 
     st.header("Bookmakerspy - Modélisation")
-    
 
+    st.subheader("Comparaison de modèles")
+    
+    # fonction qui créée les train et test
     @st.cache
     def get_datasets():
 
@@ -69,21 +72,66 @@ def app():
         res = [[X_train_NR,X_test_NR],[X_train_FS,X_test_FS],[X_train_R,X_test_R],y_test,y_train]
         return res
     
-    X_train_NR = get_datasets()[0][0]
-    X_test_NR = get_datasets()[0][1]
+    # fonction qui créée les dashboards
+    def create_dashboard(metricsNR,metricsFS,metricsR):
 
-    X_train_FS = get_datasets()[1][0]
-    X_test_FS = get_datasets()[1][1]
+        st.caption('Dataset non réduit')
 
-    X_train_R = get_datasets()[2][0]
-    X_test_R = get_datasets()[2][1]
+        col1,col2,col3 = st.columns([1,.5,2])
 
-    y_test = get_datasets()[3]
-    y_train = get_datasets()[4]
+        f1_score_nr = [metricsNR[3]['A']['f1-score'],metricsNR[3]['D']['f1-score'],metricsNR[3]['H']['f1-score']]
+        conf_matrix_nr = confusion_matrix(y_test, metricsNR[2])
+        
+        with col1:
+            st.write("F1 Score")
+            fig, ax = plt.subplots()
+            ax.bar(x=['Away','Draw','Home'],height=f1_score_nr)
+            ax.spines['right'].set_visible(False)
+            ax.spines['top'].set_visible(False) 
+            plt.yticks(fontsize=16)
+            plt.xticks(fontsize=16)
+            st.pyplot(fig)
 
+            st.metric(label="Accuracy Train", value=round(metricsNR[4], 2))
+            st.metric(label="Accuracy Test", value=round(metricsNR[5], 2))
+            
+
+        with col3:
+            st.write("Matrice de confusion")
+            fig, ax = plt.subplots()
+            ax.matshow(conf_matrix_nr, cmap=plt.cm.Blues, alpha=0.3)
+            for i in range(conf_matrix_nr.shape[0]):
+                for j in range(conf_matrix_nr.shape[1]):
+                    ax.text(x=j,y=i,s=conf_matrix_nr[i, j], va='center', ha='center',fontsize=18)
+            
+            labels = ['Away','Draw','Home']
+            ax.set_xticklabels(['']+labels)
+            ax.set_yticklabels(['']+labels)
+            plt.xticks(fontsize=14)
+            plt.yticks(fontsize=14)
+            ax.xaxis.set_label_position('top')
+            plt.xlabel('Predicted', fontsize=16)
+            plt.ylabel('Real', fontsize=16)
+            st.pyplot(fig)
+
+    
+    # création des datasets train et test
+    with st.spinner('Mise en place des données train et test...'):
+        X_train_NR = get_datasets()[0][0]
+        X_test_NR = get_datasets()[0][1]
+
+        X_train_FS = get_datasets()[1][0]
+        X_test_FS = get_datasets()[1][1]
+
+        X_train_R = get_datasets()[2][0]
+        X_test_R = get_datasets()[2][1]
+
+        y_test = get_datasets()[3]
+        y_train = get_datasets()[4]
+    
+    # création des modèles de régression logistique
     @st.cache
     def get_data_logreg():
-
         parametres = {'C':[0.05,0.1,1,3],'l1_ratio': [0.01, 0.1, 0.2, 0.5, 0.99]}
 
         clf_NR = linear_model.LogisticRegression(penalty = 'elasticnet', solver = 'saga',max_iter = 2000)
@@ -102,30 +150,40 @@ def app():
         y_pred_cfl_FS = grid_clf_FS.predict(X_test_FS)
         y_pred_cfl_R  = grid_clf_R.predict(X_test_R)
 
-        return [[clf_NR,grid_clf_NR,y_pred_cfl_NR],[],[]]
+        report_NR = classification_report(y_test, pd.DataFrame(y_pred_cfl_NR),output_dict=True)
+        accuracy_train_NR = grid_clf_NR.score(X_train_NR, y_train)
+        accuracy_test_NR = grid_clf_NR.score(X_test_NR, y_test)
+
+        report_FS = classification_report(y_test, pd.DataFrame(y_pred_cfl_FS),output_dict=True)
+        accuracy_train_FS = grid_clf_FS.score(X_train_FS, y_train)
+        accuracy_test_FS = grid_clf_FS.score(X_test_FS, y_test)
+
+        report_R = classification_report(y_test, pd.DataFrame(y_pred_cfl_R),output_dict=True)
+        accuracy_train_R = grid_clf_R.score(X_train_R, y_train)
+        accuracy_test_R = grid_clf_R.score(X_test_R, y_test)
+        
+        return [[clf_NR,grid_clf_NR,y_pred_cfl_NR,report_NR,accuracy_train_NR,accuracy_test_NR],[clf_FS,grid_clf_FS,y_pred_cfl_FS,report_FS,accuracy_train_FS,accuracy_test_FS],[clf_R,grid_clf_R,y_pred_cfl_R,report_R,accuracy_train_R,accuracy_test_R]]
+
+    
+    option = st.selectbox(
+     'Choisir un modèle',
+     ('Régression logistique', 'Home phone', 'Mobile phone'))
+
+    if option == 'Régression logistique':
+
+        with st.spinner('Calculs en cours'):
+           
+            logregNR = get_data_logreg()[0]
+            logregFS = get_data_logreg()[1]
+            logregR = get_data_logreg()[2]
+
+            create_dashboard(logregNR,logregFS,logregR)
+
+        
 
 
-    logregNR = get_data_logreg()[0]
 
-    conf_matrix = confusion_matrix(y_true=y_test, y_pred=logregNR[2])
-    
-    fig, ax = plt.subplots(figsize=(7.5, 7.5))
-    ax.matshow(conf_matrix, cmap=plt.cm.Blues, alpha=0.3)
-    for i in range(conf_matrix.shape[0]):
-        for j in range(conf_matrix.shape[1]):
-            ax.text(x=j, y=i,s=conf_matrix[i, j], va='center', ha='center', size='xx-large')
-    
-    plt.xlabel('Predictions', fontsize=18)
-    plt.ylabel('Actuals', fontsize=18)
-    plt.title('Confusion Matrix', fontsize=18)
-    
-    st.subheader("Régression logistique")
 
-    col1, col2 = st.columns([3, 1])
-    with col2:
-        st.pyplot(fig)
-    
-    
     #print(classification_report(y_test, pd.DataFrame(logregNR[2])))
 
     
