@@ -68,12 +68,34 @@ def app():
     
     nb_simu = 10000
     match = {i: pd.DataFrame(columns = range(nb_simu)) for i in ['home', 'away']}
-    s = pd.DataFrame(columns = pd.MultiIndex.from_product([['Away'], list(np.arange(9))]), index = pd.MultiIndex.from_product([['Home'], list(np.arange(9))]))
+    scorelines = pd.DataFrame(columns = pd.MultiIndex.from_product([['Away'], list(np.arange(9))]), index = pd.MultiIndex.from_product([['Home'], list(np.arange(9))]))
 
     match['home'] = np.random.poisson(params['λ'][0], nb_simu)
     match['away'] = np.random.poisson(params['λ'][1], nb_simu)
 
     for i in range(9):
       for j in range(9):
-        s[('Away', i)][('Home', j)] = 100 * sum([1 if (u == i) & (v == j) else 0 for (u, v) in zip (match['home'], match['away'])])
-    s = s / nb_simu
+        scorelines[('Away', j)][('Home', i)] = 100 * sum([1 if (u == i) & (v == j) else 0 for (u, v) in zip (match['home'], match['away'])])
+    
+    scorelines = scorelines / nb_simu
+    
+    def cell_color(df):
+        color = pd.DataFrame(index = df.index, columns = df.columns)
+        for i in range(9):
+            for j in range(9):
+                if i > j:
+                    color[('Away', j)][('Home', i)] = 'background-color: #add8e6;'
+                    if df[('Away', j)][('Home', i)] == max(df.max()):
+                        color[('Away', j)][('Home', i)] = color[('Away', j)][('Home', i)] + 'border: dashed black;'
+                if i == j:
+                    color[('Away', j)][('Home', i)] = 'background-color: #90ee90;'
+                    if df[('Away', j)][('Home', i)] == max(df.max()):
+                        color[('Away', j)][('Home', i)] = color[('Away', j)][('Home', i)] + 'border: dashed black;'
+                if i < j:
+                    color[('Away', j)][('Home', i)] = 'background-color: #ffcccb;'
+                    if df[('Away', j)][('Home', i)] == max(df.max()):
+                        color[('Away', j)][('Home', i)] = color[('Away', j)][('Home', i)] + 'border: dashed black;'
+        return color
+  
+    st.dataframe(scorelines.style.apply(cell_color, axis = None))
+
