@@ -43,7 +43,7 @@ def app():
     st.dataframe(coeffs.style.format("{:20,.4f}"))
     
     
-    st.markdown('Application de la simulation: match Chelsea - Liverpool du 6 Mai 2018')
+    st.markdown("Exemple d'application: match Chelsea - Liverpool du 6 Mai 2018")
     
     features = pd.DataFrame([[19.33333, 7, 0.83112, 56.83333, 6.85429, 14.33333, 9, 6.93083, 7.68778, 1.33333],
                              [17.66667, 4, 0.82617, 63.76667, 6.73786, 10.66667, 4, 6.91444, 7.14444, 1.33333]],
