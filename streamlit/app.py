@@ -5,7 +5,7 @@ import streamlit as st
 # Custom imports
 from multipage import MultiPage
 from pages import (
-    donnees_preprocessing, exploration_dataviz
+    donnees_preprocessing, exploration_dataviz, modelisation
 )
 
 app = MultiPage()
@@ -16,6 +16,7 @@ app = MultiPage()
 # Add all your application here
 app.add_page('1. Données & pre-processing', donnees_preprocessing.app)
 app.add_page('2. Exploration & dataviz', exploration_dataviz.app)
+app.add_page('5. Modélisation', modelisation.app)
 
 # The main app
 app.run()
