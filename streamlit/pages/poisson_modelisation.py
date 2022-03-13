@@ -94,6 +94,18 @@ def app():
             for j in range(9):
                 if i > j:
                     color[('Away', j)][('Home', i)] = 'background-color: #add8e6;'
+                if i == j:
+                    color[('Away', j)][('Home', i)] = 'background-color: #90ee90;'
+                if i < j:
+                    color[('Away', j)][('Home', i)] = 'background-color: #ffcccb;'
+        return color
+    
+    def cell_color_prediction(df):
+        color = pd.DataFrame(index = df.index, columns = df.columns)
+        for i in range(9):
+            for j in range(9):
+                if i > j:
+                    color[('Away', j)][('Home', i)] = 'background-color: #add8e6;'
                     if df[('Away', j)][('Home', i)] == max(df.max()):
                         color[('Away', j)][('Home', i)] = color[('Away', j)][('Home', i)] + 'border: dashed black;'
                 if i == j:
@@ -106,7 +118,7 @@ def app():
                         color[('Away', j)][('Home', i)] = color[('Away', j)][('Home', i)] + 'border: dashed black;'
         return color
   
-    st.dataframe(scorelines.style.apply(cell_color, axis = None).format("{:20,.2f}"))
+    st.dataframe(scorelines.style.apply(cell_color_prediction, axis = None).format("{:20,.2f}"))
     
     
     probaH = 0
@@ -126,6 +138,6 @@ def app():
     probaD = round(probaD, 2)
     probaA = round(probaA, 2)
                 
-    st.write('La probabilité pour H est de ', probaH, '%')
-    st.write('La probabilité pour D est de ', probaD, '%') 
-    st.write('La probabilité pour A est de ', probaA, '%') 
+    st.write(f"La probabilité pour H est de {probaH: .2f}%")
+    st.write(f"La probabilité pour D est de {probaD: .2f}%") 
+    st.write(f"La probabilité pour A est de {probaA: .2f}%") 
