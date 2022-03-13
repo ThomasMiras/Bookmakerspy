@@ -65,28 +65,47 @@ def app():
     
     st.markdown('Ce qui donne les tableaux suivants:')
     
-    df = pd.DataFrame(index = ["Chelsea", "Liverpool", "Result"], columns = pd.Index(['Match 1', 'Match 2', 'Match 3', 'Match 4', 'Match 5'], name = 'Model'))
-        
+    df = pd.DataFrame([['1', '0', '1', '1', '1'], 
+                       ['1', '1', '0', '0', '2'], 
+                       ['D', 'A', 'H', 'H', 'A']], 
+                       index = ["Chelsea", "Liverpool", "Result"],
+                       columns = pd.Index(['Match 1', 'Match 2', 'Match 3', 'Match 4', 'Match 5'], name = 'Model'))
+    
+    st.dataframe(df.style.apply(lambda x: ['background-color: #add8e6;' if v =='H' else 'background-color: #90ee90;' if v == 'D' else 'background-color: #ffcccb;' if v == 'A' else 'background-color: #ffffff;' for v in x]))
+    
+    
     nb_simu = 10000
     match = {i: pd.DataFrame(columns = range(nb_simu)) for i in ['home', 'away']}
-    scorelines = pd.DataFrame(columns = pd.MultiIndex.from_product([['Away'], list(np.arange(9))]), index = pd.MultiIndex.from_product([['Home'], list(np.arange(9))]))
+    scorelines = pd.DataFrame(columns = pd.MultiIndex.from_product([['Away'], list(np.arange(9))]), 
+                              index = pd.MultiIndex.from_product([['Home'], list(np.arange(9))]))
 
     match['home'] = np.random.poisson(params['λ'][0], nb_simu)
     match['away'] = np.random.poisson(params['λ'][1], nb_simu)
     match['score'] = [str(u) + '-' + str(v) for (u, v) in zip(match['home'], match['away'])]
     
-    df.loc['Chelsea', :] = [str(e) for e in match['home'][0:5]]
-    df.loc['Liverpool', :] = [str(e) for e in match['away'][0:5]]
-    df.loc['Result', :] = ['H' if u > v else 'D' if u == v else 'A' for (u, v) in zip(df.loc['Chelsea', :], df.loc['Liverpool', :])]
     
-    st.dataframe(df.style.apply(lambda x: ['background-color: #add8e6;' if v =='H' else 'background-color: #90ee90;' if v == 'D' else 'background-color: #ffcccb;' if v == 'A' else 'background-color: #ffffff;' for v in x]))
-    
-
     for i in range(9):
       for j in range(9):
         scorelines[('Away', j)][('Home', i)] = 100 * sum([1 if (u == i) & (v == j) else 0 for (u, v) in zip (match['home'], match['away'])])
     
     scorelines = scorelines / nb_simu
+    
+    probaH = 0
+    probaD = 0
+    probaA = 0
+    
+    for i in range(9):
+        for j in range(9):
+            if i > j:
+                probaH = probaH + scorelines[('Away', j)][('Home', i)]
+            if i == j:
+                probaD = probaD + scorelines[('Away', j)][('Home', i)]
+            if i < j:
+                probaA = probaA + scorelines[('Away', j)][('Home', i)]
+    
+    probaH = round(probaH, 2)
+    probaD = round(probaD, 2)
+    probaA = round(probaA, 2)
     
     def cell_color(df):
         color = pd.DataFrame(index = df.index, columns = df.columns)
@@ -117,27 +136,14 @@ def app():
                     if df[('Away', j)][('Home', i)] == max(df.max()):
                         color[('Away', j)][('Home', i)] = color[('Away', j)][('Home', i)] + 'border: dashed black;'
         return color
-  
-    st.dataframe(scorelines.style.apply(cell_color_prediction, axis = None).format("{:20,.2f}"))
     
     
-    probaH = 0
-    probaD = 0
-    probaA = 0
+    prediction = st.checkbox('afficher les prédictions')
     
-    for i in range(9):
-        for j in range(9):
-            if i > j:
-                probaH = probaH + scorelines[('Away', j)][('Home', i)]
-            if i == j:
-                probaD = probaD + scorelines[('Away', j)][('Home', i)]
-            if i < j:
-                probaA = probaA + scorelines[('Away', j)][('Home', i)]
-    
-    probaH = round(probaH, 2)
-    probaD = round(probaD, 2)
-    probaA = round(probaA, 2)
-                
-    st.write(f"La probabilité pour H est de {probaH: .2f}%")
-    st.write(f"La probabilité pour D est de {probaD: .2f}%") 
-    st.write(f"La probabilité pour A est de {probaA: .2f}%") 
+    if prediction:
+        st.dataframe(scorelines.style.apply(cell_color_prediction, axis = None).format("{:20,.2f}"))
+        st.write(f"La probabilité pour H est de {probaH: .2f}%")
+        st.write(f"La probabilité pour D est de {probaD: .2f}%") 
+        st.write(f"La probabilité pour A est de {probaA: .2f}%")
+    else:
+        st.dataframe(scorelines.style.apply(cell_color, axis = None).format("{:20,.2f}"))
