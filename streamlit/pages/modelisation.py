@@ -7,6 +7,10 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import confusion_matrix
 from sklearn import neighbors
+from sklearn.ensemble import AdaBoostClassifier
+from sklearn.tree import DecisionTreeClassifier
+from sklearn import svm
+from sklearn import model_selection
 from sklearn import linear_model
 from sklearn.model_selection import GridSearchCV, cross_val_score   
 from sklearn.decomposition import PCA
@@ -305,10 +309,86 @@ def app():
         
         return [[knn_NR,grid_knn_NR,y_pred_knn_NR,report_NR,accuracy_train_NR,accuracy_test_NR],[knn_FS,grid_knn_FS,y_pred_knn_FS,report_FS,accuracy_train_FS,accuracy_test_FS],[knn_R,grid_knn_R,y_pred_knn_R,report_R,accuracy_train_R,accuracy_test_R]]
 
+    # création des modèles de svm
+    @st.cache
+    def get_data_svm():
+        parametres = {'C':[0.1,1,3], 'kernel':['rbf','linear'], 'gamma':[0.005, 0.1, 0.5]}# Cross validation
+
+        clf_svm_NR = svm.SVC(probability=True)
+        clf_svm_FS = svm.SVC(probability=True)
+        clf_svm_R = svm.SVC(probability=True)
+
+        grid_clf_svm_NR = model_selection.GridSearchCV(estimator=clf_svm_NR, param_grid=parametres)
+        grid_clf_svm_FS = model_selection.GridSearchCV(estimator=clf_svm_FS, param_grid=parametres)
+        grid_clf_svm_R  = model_selection.GridSearchCV(estimator=clf_svm_R, param_grid=parametres)
+
+        grid_clf_svm_NR.fit(X_train_NR,y_train)
+        grid_clf_svm_FS.fit(X_train_FS,y_train)
+        grid_clf_svm_R.fit(X_train_R,y_train)
+
+
+        y_pred_clf_svm_NR = grid_clf_svm_NR.predict(X_test_NR)
+        y_pred_clf_svm_FS = grid_clf_svm_FS.predict(X_test_FS)
+        y_pred_clf_svm_R  = grid_clf_svm_R.predict(X_test_R)
+
+        report_NR = classification_report(y_test, pd.DataFrame(y_pred_clf_svm_NR),output_dict=True)
+        accuracy_train_NR = grid_clf_svm_NR.score(X_train_NR, y_train)
+        accuracy_test_NR = grid_clf_svm_NR.score(X_test_NR, y_test)
+
+        report_FS = classification_report(y_test, pd.DataFrame(y_pred_clf_svm_FS),output_dict=True)
+        accuracy_train_FS = grid_clf_svm_FS.score(X_train_FS, y_train)
+        accuracy_test_FS = grid_clf_svm_FS.score(X_test_FS, y_test)
+
+        report_R = classification_report(y_test, pd.DataFrame(y_pred_clf_svm_R),output_dict=True)
+        accuracy_train_R = grid_clf_svm_R.score(X_train_R, y_train)
+        accuracy_test_R = grid_clf_svm_R.score(X_test_R, y_test)
+        
+        return [[clf_svm_NR,grid_clf_svm_NR,y_pred_clf_svm_NR,report_NR,accuracy_train_NR,accuracy_test_NR],[clf_svm_FS,grid_clf_svm_FS,y_pred_clf_svm_FS,report_FS,accuracy_train_FS,accuracy_test_FS],[clf_svm_R,grid_clf_svm_R,y_pred_clf_svm_R,report_R,accuracy_train_R,accuracy_test_R]]
+
+    # création des modèles de Decision Tree
+    @st.cache
+    def get_data_dectree():
+        parametres = {'max_depth': [1, 2, 3, 5, 7]}
+
+        dtc_NR = DecisionTreeClassifier()
+        dtc_FS = DecisionTreeClassifier()
+        dtc_R  = DecisionTreeClassifier()
+
+        grid_dtc_NR = GridSearchCV(estimator=dtc_NR, param_grid=parametres)
+        grid_dtc_FS = GridSearchCV(estimator=dtc_FS, param_grid=parametres)
+        grid_dtc_R  = GridSearchCV(estimator=dtc_R, param_grid=parametres)
+
+
+        grid_dtc_NR.fit(X_train_NR,y_train)
+        grid_dtc_FS.fit(X_train_FS,y_train)
+        grid_dtc_R.fit(X_train_R,y_train)
+
+        y_pred_dtc_NR = grid_dtc_NR.predict(X_test_NR)
+        y_pred_dtc_FS = grid_dtc_FS.predict(X_test_FS)
+        y_pred_dtc_R  = grid_dtc_R.predict(X_test_R)
+
+        y_pred_dtc_NR = grid_dtc_NR.predict(X_test_NR)
+        y_pred_dtc_FS = grid_dtc_FS.predict(X_test_FS)
+        y_pred_dtc_R  = grid_dtc_R.predict(X_test_R)
+
+        report_NR = classification_report(y_test, pd.DataFrame(y_pred_dtc_NR),output_dict=True)
+        accuracy_train_NR = grid_dtc_NR.score(X_train_NR, y_train)
+        accuracy_test_NR = grid_dtc_NR.score(X_test_NR, y_test)
+
+        report_FS = classification_report(y_test, pd.DataFrame(y_pred_dtc_FS),output_dict=True)
+        accuracy_train_FS = grid_dtc_FS.score(X_train_FS, y_train)
+        accuracy_test_FS = grid_dtc_FS.score(X_test_FS, y_test)
+
+        report_R = classification_report(y_test, pd.DataFrame(y_pred_dtc_R),output_dict=True)
+        accuracy_train_R = grid_dtc_R.score(X_train_R, y_train)
+        accuracy_test_R = grid_dtc_R.score(X_test_R, y_test)
+        
+        return [[dtc_NR,grid_dtc_NR,y_pred_dtc_NR,report_NR,accuracy_train_NR,accuracy_test_NR],[dtc_FS,grid_dtc_FS,y_pred_dtc_FS,report_FS,accuracy_train_FS,accuracy_test_FS],[dtc_R,grid_dtc_R,y_pred_dtc_R,report_R,accuracy_train_R,accuracy_test_R]]
+
 
     option = st.selectbox(
      'Choisir un modèle',
-     ('Régression logistique', 'K plus proches voisins', 'Mobile phone'))
+     ('Régression logistique', 'K plus proches voisins', 'SVM', 'Decision Tree', 'Boosting','Random Forest','XG Boost','Voting Classifier'))
 
     if option == 'Régression logistique':
 
@@ -329,9 +409,29 @@ def app():
             knnR = get_data_knn()[2]
 
             create_dashboard(knnNR,knnFS,knnR)
+    
+    if option == 'SVM':
 
- 
+        with st.spinner('Calculs en cours'):
+            
+            svmNR = get_data_svm()[0]
+            svmFS = get_data_svm()[1]
+            svmR = get_data_svm()[2]
 
+        create_dashboard(svmNR,svmFS,svmR)
+    
+    if option == 'Decision Tree':
+
+        with st.spinner('Calculs en cours'):
+            
+            dectNR = get_data_dectree()[0]
+            dectFS = get_data_dectree()[1]
+            dectR = get_data_dectree()[2]
+
+        create_dashboard(dectNR,dectFS,dectR)
+
+    st.subheader('Résumé des performances')
+# get_data_svm
         
 
     #print(classification_report(y_test, pd.DataFrame(logregNR[2])))
