@@ -145,10 +145,14 @@ def app():
     df.loc['Result', :] = ['H' if u > v else 'D' if u == v else 'A' for (u, v) in zip(df.loc['Chelsea', :], df.loc['Liverpool', :])]
     
     
-    st.markdown('Ce qui donne les tableaux suivants:')
+    st.markdown('Ce qui donne le tableau suivant:')
     
     st.dataframe(df.style.apply(lambda x: ['background-color: #add8e6;' if v =='H' else 'background-color: #90ee90;' if v == 'D' else 'background-color: #ffcccb;' if v == 'A' else 'background-color: #ffffff;' for v in x]))
-     
+    
+    
+    st.markdown("Deux méthodes sont possibles pour déterminer le résultat")
+    st.markdown("* En fonction du score probable")
+    st.markdown("* En fonction de la probabilité des résultats")  
     
     prediction = st.checkbox('afficher les prédictions')
     
