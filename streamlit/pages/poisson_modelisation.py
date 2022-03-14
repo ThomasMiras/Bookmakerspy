@@ -62,50 +62,42 @@ def app():
     
     st.dataframe(params.style.format("{:20,.5f}"))
     
-    
-    st.markdown('Ce qui donne les tableaux suivants:')
-    
-    df = pd.DataFrame([['1', '0', '1', '1', '1'], 
-                       ['1', '1', '0', '0', '2'], 
-                       ['D', 'A', 'H', 'H', 'A']], 
-                       index = ["Chelsea", "Liverpool", "Result"],
-                       columns = pd.Index(['Match 1', 'Match 2', 'Match 3', 'Match 4', 'Match 5'], name = 'Model'))
-    
-    st.dataframe(df.style.apply(lambda x: ['background-color: #add8e6;' if v =='H' else 'background-color: #90ee90;' if v == 'D' else 'background-color: #ffcccb;' if v == 'A' else 'background-color: #ffffff;' for v in x]))
-    
-    
-    nb_simu = 10000
-    match = {i: pd.DataFrame(columns = range(nb_simu)) for i in ['home', 'away']}
-    scorelines = pd.DataFrame(columns = pd.MultiIndex.from_product([['Away'], list(np.arange(9))]), 
-                              index = pd.MultiIndex.from_product([['Home'], list(np.arange(9))]))
+   
+    @st.cache
+    def match_modelisation():
+        nb_simu = 10000
+        m = {i: pd.DataFrame(columns = range(nb_simu)) for i in ['home', 'away']}
+        s = pd.DataFrame(columns = pd.MultiIndex.from_product([['Away'], list(np.arange(9))]), index = pd.MultiIndex.from_product([['Home'], list(np.arange(9))]))
+        p = pd.DataFrame(columns = ['H', 'D', 'A'], index = ['proba'])
 
-    match['home'] = np.random.poisson(params['λ'][0], nb_simu)
-    match['away'] = np.random.poisson(params['λ'][1], nb_simu)
-    match['score'] = [str(u) + '-' + str(v) for (u, v) in zip(match['home'], match['away'])]
+        m['home'] = np.random.poisson(params['λ'][0], nb_simu)
+        m['away'] = np.random.poisson(params['λ'][1], nb_simu)
+        m['score'] = [str(u) + '-' + str(v) for (u, v) in zip(m['home'], m['away'])]
     
+        for i in range(9):
+            for j in range(9):
+                s[('Away', j)][('Home', i)] = 100 * sum([1 if (u == i) & (v == j) else 0 for (u, v) in zip (m['home'], m['away'])])
+                
+        s = s / nb_simu
+        
+        probaH = 0
+        probaD = 0
+        probaA = 0
     
-    for i in range(9):
-      for j in range(9):
-        scorelines[('Away', j)][('Home', i)] = 100 * sum([1 if (u == i) & (v == j) else 0 for (u, v) in zip (match['home'], match['away'])])
+        for i in range(9):
+            for j in range(9):
+                if i > j:
+                    probaH = probaH + s[('Away', j)][('Home', i)]
+                if i == j:
+                    probaD = probaD + s[('Away', j)][('Home', i)]
+                if i < j:
+                    probaA = probaA + s[('Away', j)][('Home', i)]
     
-    scorelines = scorelines / nb_simu
+        p['H']['proba'] = round(probaH, 2)
+        p['D']['proba'] = round(probaD, 2)
+        p['A']['proba'] = round(probaA, 2)
     
-    probaH = 0
-    probaD = 0
-    probaA = 0
-    
-    for i in range(9):
-        for j in range(9):
-            if i > j:
-                probaH = probaH + scorelines[('Away', j)][('Home', i)]
-            if i == j:
-                probaD = probaD + scorelines[('Away', j)][('Home', i)]
-            if i < j:
-                probaA = probaA + scorelines[('Away', j)][('Home', i)]
-    
-    probaH = round(probaH, 2)
-    probaD = round(probaD, 2)
-    probaA = round(probaA, 2)
+        return m, s, p
     
     def cell_color(df):
         color = pd.DataFrame(index = df.index, columns = df.columns)
@@ -137,13 +129,25 @@ def app():
                         color[('Away', j)][('Home', i)] = color[('Away', j)][('Home', i)] + 'border: dashed black;'
         return color
     
+    match, scorelines, proba = match_modelisation()
+    
+    df = pd.DataFrame(index = ["Chelsea", "Liverpool", "Result"], columns = pd.Index(['Match 1', 'Match 2', 'Match 3', 'Match 4', 'Match 5'], name = 'Model'))
+    df.loc['Chelsea', :] = [str(e) for e in match['home'][0:5]]
+    df.loc['Liverpool', :] = [str(e) for e in match['away'][0:5]]
+    df.loc['Result', :] = ['H' if u > v else 'D' if u == v else 'A' for (u, v) in zip(df.loc['Chelsea', :], df.loc['Liverpool', :])]
+    
+    
+    st.markdown('Ce qui donne les tableaux suivants:')
+    
+    st.dataframe(df.style.apply(lambda x: ['background-color: #add8e6;' if v =='H' else 'background-color: #90ee90;' if v == 'D' else 'background-color: #ffcccb;' if v == 'A' else 'background-color: #ffffff;' for v in x]))
+     
     
     prediction = st.checkbox('afficher les prédictions')
     
     if prediction:
         st.dataframe(scorelines.style.apply(cell_color_prediction, axis = None).format("{:20,.2f}"))
-        st.write(f"La probabilité pour H est de {probaH: .2f}%")
-        st.write(f"La probabilité pour D est de {probaD: .2f}%") 
-        st.write(f"La probabilité pour A est de {probaA: .2f}%")
+        st.write('La probabilité pour H est de ', proba['H']['proba'],'%')
+        st.write('La probabilité pour D est de ', proba['D']['proba'],'%')
+        st.write('La probabilité pour A est de ', proba['A']['proba'],'%')
     else:
         st.dataframe(scorelines.style.apply(cell_color, axis = None).format("{:20,.2f}"))
