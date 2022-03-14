@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import xgboost as xgb
+import numpy as np
 from sklearn.model_selection import train_test_split, KFold, cross_validate
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import confusion_matrix
@@ -13,7 +15,6 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import VotingClassifier
 from sklearn.metrics import f1_score
 from sklearn import svm
-import xgboost as xgb
 from sklearn import model_selection
 from sklearn import linear_model
 from sklearn.model_selection import GridSearchCV, cross_val_score   
@@ -26,7 +27,15 @@ def app():
 
     st.subheader("Comparaison de modèles")
 
+    # variables style mises en haut car utilisées à différents endroits
     colors = sns.color_palette('pastel')
+
+    hide_table_row_index = """
+            <style>
+            tbody th {display:none}
+            .blank {display:none}
+            </style>
+            """
     
     # fonction qui créée les train et test
     @st.cache
@@ -631,32 +640,175 @@ def app():
 
     st.subheader('Résumé des performances')
 
-    st.write("Accuracy")
-
-    st.write("F1 Score")
-
-
-
-
-
-
-
-
-# get_data_svm
-        
-
-    #print(classification_report(y_test, pd.DataFrame(logregNR[2])))
-
+    models = ['Régression logistique', 'K plus proches voisins', 'SVM', 'Decision Tree', 'Boosting','Random Forest','XG Boost','Voting Classifier']
+    models_abbr = ['RL', 'KN', 'SVM', 'DT', 'BO','RF','XGB','VC']
     
-    #lr = LogisticRegression()
-    #gnb = GaussianNB()
-    #svc = NaivelyCalibratedLinearSVC(C=1.0)
-    #rfc = RandomForestClassifier()
+    @st.cache
+    def get_metrics():
+        report_nr = [get_data_logreg()[0][3],get_data_knn()[0][3],get_data_svm()[0][3],get_data_dectree()[0][3],get_data_boosting()[0][3],get_data_rf()[0][3],get_data_xgboost()[0][3],get_data_vc()[0][3]]
+        report_fs = [get_data_logreg()[1][3],get_data_knn()[1][3],get_data_svm()[1][3],get_data_dectree()[1][3],get_data_boosting()[1][3],get_data_rf()[1][3],get_data_xgboost()[1][3],get_data_vc()[1][3]]
+        report_r = [get_data_logreg()[2][3],get_data_knn()[2][3],get_data_svm()[2][3],get_data_dectree()[2][3],get_data_boosting()[2][3],get_data_rf()[2][3],get_data_xgboost()[2][3],get_data_vc()[2][3]]
 
-    #clf_list = [
-    #    (lr, "Logistic"),
-    #    (gnb, "Naive Bayes"),
-    #    (svc, "SVC"),
-    #    (rfc, "Random forest"),
-    #]
+        return [report_nr,report_fs,report_r]
 
+    with st.spinner('Calculs en cours'):
+    
+        st.write("Accuracy")
+
+        accuracy_nr = [d['accuracy'] for d in get_metrics()[0]]
+        accuracy_fs = [d['accuracy'] for d in get_metrics()[1]]
+        accuracy_r = [d['accuracy'] for d in get_metrics()[2]]
+
+        col1,col2,col3,col4,col5 = st.columns([1,.2,1,.2,1])
+        
+        with col1:
+
+            st.caption("Dataset non réduit")
+            fig, ax = plt.subplots()
+            ax.bar(x=models,height=accuracy_nr, color = colors)
+            ax.spines['right'].set_visible(False)
+            ax.spines['top'].set_visible(False) 
+            plt.yticks(fontsize=16)
+            plt.xticks(fontsize=16)
+            ax.tick_params(axis='x', rotation=90)
+            st.pyplot(fig)
+
+            d = {'Modèles':models_abbr,'Accuracy NR': accuracy_nr}
+            st.markdown(hide_table_row_index, unsafe_allow_html=True)
+            st.table(pd.DataFrame(d).style.format("{:.2}"))   
+
+        
+        with col3:
+            st.caption("Dataset sélection de features")
+            fig, ax = plt.subplots()
+            ax.bar(x=models,height=accuracy_fs, color = sns.color_palette('pastel'))
+            ax.spines['right'].set_visible(False)
+            ax.spines['top'].set_visible(False) 
+            plt.yticks(fontsize=16)
+            plt.xticks(fontsize=16)
+            ax.tick_params(axis='x', rotation=90)
+            st.pyplot(fig)
+
+            d = {'Modèles':models_abbr,'Accuracy FS': accuracy_fs}
+            st.markdown(hide_table_row_index, unsafe_allow_html=True)
+            st.table(pd.DataFrame(d).style.format("{:.2}"))   
+
+        with col5:
+            st.caption("Dataset réduit")
+            fig, ax = plt.subplots()
+            ax.bar(x=models,height=accuracy_r, color = sns.color_palette('pastel'))
+            ax.spines['right'].set_visible(False)
+            ax.spines['top'].set_visible(False) 
+            plt.yticks(fontsize=16)
+            plt.xticks(fontsize=16)
+            ax.tick_params(axis='x', rotation=90)
+            st.pyplot(fig)
+
+            d = {'Modèles':models_abbr,'Accuracy R': accuracy_r}
+            st.markdown(hide_table_row_index, unsafe_allow_html=True)
+            st.table(pd.DataFrame(d).style.format("{:.2}"))   
+            
+
+        st.write("F1 Score")
+
+        f1_nr = [[d['A']['f1-score'],d['D']['f1-score'],d['H']['f1-score']] for d in get_metrics()[0]]
+        f1_fs = [[d['A']['f1-score'],d['D']['f1-score'],d['H']['f1-score']]  for d in get_metrics()[1]]
+        f1_r = [[d['A']['f1-score'],d['D']['f1-score'],d['H']['f1-score']]  for d in get_metrics()[2]]
+
+        f1_nr_H = [d['H']['f1-score'] for d in get_metrics()[0]]
+        f1_nr_A = [d['A']['f1-score'] for d in get_metrics()[0]]
+        f1_nr_D = [d['D']['f1-score'] for d in get_metrics()[0]]      
+
+        f1_fs_H = [d['H']['f1-score'] for d in get_metrics()[1]]
+        f1_fs_A = [d['A']['f1-score'] for d in get_metrics()[1]]
+        f1_fs_D = [d['D']['f1-score'] for d in get_metrics()[1]]
+
+        f1_r_H = [d['H']['f1-score'] for d in get_metrics()[2]]
+        f1_r_A = [d['A']['f1-score'] for d in get_metrics()[2]]
+        f1_r_D = [d['D']['f1-score'] for d in get_metrics()[2]]            
+        
+        col1,col2,col3,col4,col5 = st.columns([1,.2,1,.2,1])
+
+        with col1:
+            st.caption("Dataset non réduit")
+
+            x = np.arange(len(models_abbr))  # the label locations
+            width = 0.3  # the width of the bars
+
+            fig, ax = plt.subplots()
+            rects1 = ax.bar(x - .3, f1_nr_A, width, label='Away',color='#a1c9f4')
+            rects2 = ax.bar(x - .1, f1_nr_D, width, label='Draw',color='#8de5a1')
+            rects3 = ax.bar(x + .1, f1_nr_H, width, label='Home',color='#ffb482')
+
+            # Add some text for labels, title and custom x-axis tick labels, etc.
+            ax.spines['right'].set_visible(False)
+            ax.spines['top'].set_visible(False)
+            ax.set_ylabel('F1 Score')
+            ax.set_xticks(x, models_abbr)
+            ax.legend()
+
+            #ax.bar_label(rects1, padding=3)
+            #ax.bar_label(rects2, padding=3)
+
+            fig.tight_layout()
+
+            st.pyplot(fig)
+
+
+
+            st.dataframe(pd.DataFrame(f1_nr,columns=['Away','Draw','Home'],index=models_abbr).style.format("{:.2}").highlight_max(axis=0))
+
+    with col3:
+            
+        st.caption("Dataset sélection de features")
+
+        x = np.arange(len(models_abbr))  # the label locations
+        width = 0.3  # the width of the bars
+
+        fig, ax = plt.subplots()
+        rects1 = ax.bar(x - .3, f1_fs_A, width, label='Away',color='#a1c9f4')
+        rects2 = ax.bar(x - .1, f1_fs_D, width, label='Draw',color='#8de5a1')
+        rects3 = ax.bar(x + .1, f1_fs_H, width, label='Home',color='#ffb482')
+
+        # Add some text for labels, title and custom x-axis tick labels, etc.
+        ax.spines['right'].set_visible(False)
+        ax.spines['top'].set_visible(False)
+        ax.set_ylabel('F1 Score')
+        ax.set_xticks(x, models_abbr)
+        ax.legend()
+
+        #ax.bar_label(rects1, padding=3)
+        #ax.bar_label(rects2, padding=3)
+
+        fig.tight_layout()
+
+        st.pyplot(fig)
+        st.dataframe(pd.DataFrame(f1_fs,columns=['Away','Draw','Home'],index=models_abbr).style.format("{:.2}").highlight_max(axis=0))
+
+
+    with col5:
+            
+        st.caption("Dataset sélection de features")
+
+        x = np.arange(len(models_abbr))  # the label locations
+        width = 0.3  # the width of the bars
+
+        fig, ax = plt.subplots()
+        rects1 = ax.bar(x - .3, f1_r_A, width, label='Away',color='#a1c9f4')
+        rects2 = ax.bar(x - .1, f1_r_D, width, label='Draw',color='#8de5a1')
+        rects3 = ax.bar(x + .1, f1_r_H, width, label='Home',color='#ffb482')
+
+        # Add some text for labels, title and custom x-axis tick labels, etc.
+        ax.spines['right'].set_visible(False)
+        ax.spines['top'].set_visible(False)
+        ax.set_ylabel('F1 Score')
+        ax.set_xticks(x, models_abbr)
+        ax.legend()
+
+        #ax.bar_label(rects1, padding=3)
+        #ax.bar_label(rects2, padding=3)
+
+        fig.tight_layout()
+
+        st.pyplot(fig)
+        st.dataframe(pd.DataFrame(f1_r,columns=['Away','Draw','Home'],index=models_abbr).style.format("{:.2}").highlight_max(axis=0))
