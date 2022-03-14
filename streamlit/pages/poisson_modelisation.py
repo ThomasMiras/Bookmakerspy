@@ -3,6 +3,7 @@ import pandas as pd
 import seaborn as sns
 import streamlit as st
 import matplotlib.pyplot as plt
+from sklearn.metrics import classification_report
 
 import os
 os.chdir('C:/Users/LANDRYGOL/Documents/GitHub/Bookmakerspy/streamlit')
@@ -17,7 +18,7 @@ def app():
     df['total_goal'] = df['home_goal'] + df['away_goal']
 
     st.header('Simulation par un modèle de Poisson')
-    st.markdown('Rappels sur le nombre de buts par match')
+    st.caption('Rappels sur le nombre de buts par match')
     
     
     col1, col2 = st.columns(2)
@@ -41,7 +42,7 @@ def app():
         st.pyplot(fig2)
     
     
-    st.markdown('Les coefficients du modèle sont les suivants:')
+    st.caption('Les coefficients du modèle sont les suivants:')
     
     coeffs = pd.DataFrame([[-0.0074, 0.0099, -0.5456, 0.0085, 0.1875, 0.0175, 0.0240, -0.1687, -0.0200, 0.1342],
                           [-0.0033, 0.0101, -2.0334, 0.0279, -0.2725, 0.0350, 0.0446, 0.1306, 0.1001, 0.0300]],
@@ -53,7 +54,7 @@ def app():
     st.dataframe(coeffs.style.format("{:20,.4f}"))
     
     
-    st.markdown("Exemple d'application: match Chelsea - Liverpool du 6 Mai 2018")
+    st.caption("Exemple d'application: match Chelsea - Liverpool du 6 Mai 2018")
     
     features = pd.DataFrame([[19.33333, 7, 0.83112, 56.83333, 6.85429, 14.33333, 9, 6.93083, 7.68778, 1.33333],
                              [17.66667, 4, 0.82617, 63.76667, 6.73786, 10.66667, 4, 6.91444, 7.14444, 1.33333]],
@@ -65,7 +66,7 @@ def app():
     st.dataframe(features.style.format("{:20,.5f}"))
     
     
-    st.markdown('Les valeurs de lambda sont les suivantes:')
+    st.caption('Les valeurs de lambda sont les suivantes:')
     
     params = pd.DataFrame(index = ["Chelsea", "Liverpool"], columns = pd.Index(['λ'], name = 'Model'))
     params['λ'] = list(np.exp(np.sum(np.multiply(coeffs, features), axis = 1)))
@@ -155,7 +156,7 @@ def app():
     df.loc['Result', :] = ['H' if u > v else 'D' if u == v else 'A' for (u, v) in zip(df.loc['Chelsea', :], df.loc['Liverpool', :])]
     
     
-    st.markdown('Ce qui donne le tableau suivant:')
+    st.caption('Ce qui donne le tableau suivant:')
     
     st.dataframe(df.style.apply(lambda x: ['background-color: #ffb482;' if v =='H' else 'background-color: #8de5a1;' if v == 'D' else 'background-color: #a1c9f4;' if v == 'A' else 'background-color: #ffffff;' for v in x]))
     
