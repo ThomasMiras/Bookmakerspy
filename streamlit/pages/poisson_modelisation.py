@@ -20,15 +20,25 @@ def app():
     st.markdown('Rappels sur le nombre de buts par match')
     
     
-    season = st.selectbox('season: ', sorted(df['season'].unique()))
-    df_selected = df.loc[df['season'] == season]
+    col1, col2 = st.columns(2)
+        
+    fig1 = plt.figure()
+    g1 = sns.histplot(data = df, x = 'home_goal', bins = 9, hue = 'season', kde = True, stat = 'density', multiple = 'dodge');
+    sns.despine(top = True, right = True, left = False, bottom = False)
+    g1.set_xticks(range(9))
+    plt.xlabel('Full time home goals')
     
-    fig = plt.figure(figsize = (2.5, 2.5))
-    plt.gca().axes.xaxis.set_visible(False)
-    plt.gca().axes.yaxis.set_visible(False)
-    g = sns.histplot(data = df_selected, x = 'total_goal', bins = 9, kde = True, stat = 'density', multiple = 'dodge', legend = False);
-    g.set_xticks(range(9))
-    st.pyplot(fig)
+    with col1:
+        st.pyplot(fig1)
+    
+    fig2 = plt.figure()
+    g2 = sns.histplot(data = df, x = 'away_goal', bins = 9, hue = 'season', kde = True, stat = 'density', multiple = 'dodge');
+    sns.despine(top = True, right = True, left = False, bottom = False)
+    g2.set_xticks(range(9))
+    plt.xlabel('Full time away goals')
+    
+    with col2:
+        st.pyplot(fig2)
     
     
     st.markdown('Les coefficients du modèle sont les suivants:')
@@ -104,11 +114,11 @@ def app():
         for i in range(9):
             for j in range(9):
                 if i > j:
-                    color[('Away', j)][('Home', i)] = 'background-color: #add8e6;'
+                    color[('Away', j)][('Home', i)] = 'background-color: #ffb482;'
                 if i == j:
-                    color[('Away', j)][('Home', i)] = 'background-color: #90ee90;'
+                    color[('Away', j)][('Home', i)] = 'background-color: #8de5a1;'
                 if i < j:
-                    color[('Away', j)][('Home', i)] = 'background-color: #ffcccb;'
+                    color[('Away', j)][('Home', i)] = 'background-color: #a1c9f4;'
         return color
     
     def cell_color_prediction(df):
@@ -116,24 +126,24 @@ def app():
         for i in range(9):
             for j in range(9):
                 if i > j:
-                    color[('Away', j)][('Home', i)] = 'background-color: #add8e6;'
+                    color[('Away', j)][('Home', i)] = 'background-color: #ffb482;'
                     if df[('Away', j)][('Home', i)] == max(df.max()):
                         color[('Away', j)][('Home', i)] = color[('Away', j)][('Home', i)] + 'border: dashed black;'
                 if i == j:
-                    color[('Away', j)][('Home', i)] = 'background-color: #90ee90;'
+                    color[('Away', j)][('Home', i)] = 'background-color: #8de5a1;'
                     if df[('Away', j)][('Home', i)] == max(df.max()):
                         color[('Away', j)][('Home', i)] = color[('Away', j)][('Home', i)] + 'border: dashed black;'
                 if i < j:
-                    color[('Away', j)][('Home', i)] = 'background-color: #ffcccb;'
+                    color[('Away', j)][('Home', i)] = 'background-color: #a1c9f4;'
                     if df[('Away', j)][('Home', i)] == max(df.max()):
                         color[('Away', j)][('Home', i)] = color[('Away', j)][('Home', i)] + 'border: dashed black;'
         return color
     
     def cell_color_probability(df):
         color = pd.DataFrame(index = df.index, columns = df.columns)
-        color['H']['proba'] = 'background-color: #add8e6;'
-        color['D']['proba'] = 'background-color: #90ee90;'
-        color['A']['proba'] = 'background-color: #ffcccb;'
+        color['H']['proba'] = 'background-color: #ffb482;'
+        color['D']['proba'] = 'background-color: #8de5a1;'
+        color['A']['proba'] = 'background-color: #a1c9f4;'
         return color
 
     
@@ -147,7 +157,7 @@ def app():
     
     st.markdown('Ce qui donne le tableau suivant:')
     
-    st.dataframe(df.style.apply(lambda x: ['background-color: #add8e6;' if v =='H' else 'background-color: #90ee90;' if v == 'D' else 'background-color: #ffcccb;' if v == 'A' else 'background-color: #ffffff;' for v in x]))
+    st.dataframe(df.style.apply(lambda x: ['background-color: #ffb482;' if v =='H' else 'background-color: #8de5a1;' if v == 'D' else 'background-color: #a1c9f4;' if v == 'A' else 'background-color: #ffffff;' for v in x]))
     
     
     st.markdown("Deux méthodes sont possibles pour déterminer le résultat")
