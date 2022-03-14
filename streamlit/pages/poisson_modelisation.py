@@ -78,7 +78,7 @@ def app():
         nb_simu = 10000
         m = {i: pd.DataFrame(columns = range(nb_simu)) for i in ['home', 'away']}
         s = pd.DataFrame(columns = pd.MultiIndex.from_product([['Away'], list(np.arange(9))]), index = pd.MultiIndex.from_product([['Home'], list(np.arange(9))]))
-        p = pd.DataFrame(columns = ['H', 'D', 'A'], index = ['proba'])
+        p = pd.DataFrame(columns = ['Home', 'Draw', 'Away'], index = ['proba'])
 
         m['home'] = np.random.poisson(params['λ'][0], nb_simu)
         m['away'] = np.random.poisson(params['λ'][1], nb_simu)
@@ -103,9 +103,9 @@ def app():
                 if i < j:
                     probaA = probaA + s[('Away', j)][('Home', i)]
     
-        p['H']['proba'] = round(probaH, 2)
-        p['D']['proba'] = round(probaD, 2)
-        p['A']['proba'] = round(probaA, 2)
+        p['Home']['proba'] = round(probaH, 2)
+        p['Draw']['proba'] = round(probaD, 2)
+        p['Away']['proba'] = round(probaA, 2)
     
         return m, s, p
     
@@ -141,9 +141,9 @@ def app():
     
     def cell_color_probability(df):
         color = pd.DataFrame(index = df.index, columns = df.columns)
-        color['H']['proba'] = 'background-color: #ffb482;'
-        color['D']['proba'] = 'background-color: #8de5a1;'
-        color['A']['proba'] = 'background-color: #a1c9f4;'
+        color['Home']['proba'] = 'background-color: #ffb482;'
+        color['Draw']['proba'] = 'background-color: #8de5a1;'
+        color['Away']['proba'] = 'background-color: #a1c9f4;'
         return color
 
     
