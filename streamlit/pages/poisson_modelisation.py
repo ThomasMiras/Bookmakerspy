@@ -129,6 +129,14 @@ def app():
                         color[('Away', j)][('Home', i)] = color[('Away', j)][('Home', i)] + 'border: dashed black;'
         return color
     
+    def cell_color_probability(df):
+        color = pd.DataFrame(index = df.index, columns = df.columns)
+        color['H']['proba'] = 'background-color: #add8e6;'
+        color['D']['proba'] = 'background-color: #90ee90;'
+        color['A']['proba'] = 'background-color: #ffcccb;'
+        return color
+
+    
     match, scorelines, proba = match_modelisation()
     
     df = pd.DataFrame(index = ["Chelsea", "Liverpool", "Result"], columns = pd.Index(['Match 1', 'Match 2', 'Match 3', 'Match 4', 'Match 5'], name = 'Model'))
@@ -146,8 +154,6 @@ def app():
     
     if prediction:
         st.dataframe(scorelines.style.apply(cell_color_prediction, axis = None).format("{:20,.2f}"))
-        st.write('La probabilité pour H est de ', proba['H']['proba'],'%')
-        st.write('La probabilité pour D est de ', proba['D']['proba'],'%')
-        st.write('La probabilité pour A est de ', proba['A']['proba'],'%')
+        st.dataframe(proba.style.apply(cell_color_probability, axis = None).format("{:20,.2f}"))
     else:
         st.dataframe(scorelines.style.apply(cell_color, axis = None).format("{:20,.2f}"))
