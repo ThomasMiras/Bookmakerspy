@@ -2,14 +2,18 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-from sklearn.metrics import accuracy_score
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, KFold, cross_validate
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import confusion_matrix
 from sklearn import neighbors
+from sklearn.metrics import accuracy_score
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.ensemble import AdaBoostClassifier
 from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import VotingClassifier
+from sklearn.metrics import f1_score
 from sklearn import svm
+import xgboost as xgb
 from sklearn import model_selection
 from sklearn import linear_model
 from sklearn.model_selection import GridSearchCV, cross_val_score   
@@ -77,7 +81,7 @@ def app():
         X_train_R = pca.fit_transform(X_train)
         X_test_R = pca.transform(X_test)
 
-        res = [[X_train_NR,X_test_NR],[X_train_FS,X_test_FS],[X_train_R,X_test_R],y_test,y_train]
+        res = [[X_train_NR,X_test_NR],[X_train_FS,X_test_FS],[X_train_R,X_test_R],y_test,y_train,X_train]
         return res
     
     # fonction qui créée les dashboards
@@ -238,6 +242,8 @@ def app():
 
         y_test = get_datasets()[3]
         y_train = get_datasets()[4]
+
+        X_train = get_datasets()[5]
     
     # création des modèles de régression logistique
     @st.cache
@@ -346,7 +352,7 @@ def app():
         return [[clf_svm_NR,grid_clf_svm_NR,y_pred_clf_svm_NR,report_NR,accuracy_train_NR,accuracy_test_NR],[clf_svm_FS,grid_clf_svm_FS,y_pred_clf_svm_FS,report_FS,accuracy_train_FS,accuracy_test_FS],[clf_svm_R,grid_clf_svm_R,y_pred_clf_svm_R,report_R,accuracy_train_R,accuracy_test_R]]
 
     # création des modèles de Decision Tree
-    @st.cache
+    @st.cache(allow_output_mutation=True)
     def get_data_dectree():
         parametres = {'max_depth': [1, 2, 3, 5, 7]}
 
@@ -358,14 +364,9 @@ def app():
         grid_dtc_FS = GridSearchCV(estimator=dtc_FS, param_grid=parametres)
         grid_dtc_R  = GridSearchCV(estimator=dtc_R, param_grid=parametres)
 
-
         grid_dtc_NR.fit(X_train_NR,y_train)
         grid_dtc_FS.fit(X_train_FS,y_train)
         grid_dtc_R.fit(X_train_R,y_train)
-
-        y_pred_dtc_NR = grid_dtc_NR.predict(X_test_NR)
-        y_pred_dtc_FS = grid_dtc_FS.predict(X_test_FS)
-        y_pred_dtc_R  = grid_dtc_R.predict(X_test_R)
 
         y_pred_dtc_NR = grid_dtc_NR.predict(X_test_NR)
         y_pred_dtc_FS = grid_dtc_FS.predict(X_test_FS)
@@ -384,6 +385,164 @@ def app():
         accuracy_test_R = grid_dtc_R.score(X_test_R, y_test)
         
         return [[dtc_NR,grid_dtc_NR,y_pred_dtc_NR,report_NR,accuracy_train_NR,accuracy_test_NR],[dtc_FS,grid_dtc_FS,y_pred_dtc_FS,report_FS,accuracy_train_FS,accuracy_test_FS],[dtc_R,grid_dtc_R,y_pred_dtc_R,report_R,accuracy_train_R,accuracy_test_R]]
+
+    # création des modèles de Boosting
+    @st.cache(allow_output_mutation=True)
+    def get_data_boosting():
+        dtc_NR = DecisionTreeClassifier()
+        dtc_FS = DecisionTreeClassifier()
+        dtc_R  = DecisionTreeClassifier()
+
+        ac_NR = AdaBoostClassifier(base_estimator=dtc_NR, n_estimators=400)
+        ac_FS = AdaBoostClassifier(base_estimator=dtc_FS, n_estimators=400)
+        ac_R  = AdaBoostClassifier(base_estimator=dtc_R,  n_estimators=400)
+
+        ac_NR.fit(X_train_NR,y_train)
+        ac_FS.fit(X_train_FS,y_train)
+        ac_R.fit(X_train_R,y_train)
+
+        y_pred_ac_NR = ac_NR.predict(X_test_NR)
+        y_pred_ac_FS = ac_FS.predict(X_test_FS)
+        y_pred_ac_R  = ac_R.predict(X_test_R)
+
+        report_NR = classification_report(y_test, pd.DataFrame(y_pred_ac_NR),output_dict=True)
+        accuracy_train_NR = ac_NR.score(X_train_NR, y_train)
+        accuracy_test_NR = ac_NR.score(X_test_NR, y_test)
+
+        report_FS = classification_report(y_test, pd.DataFrame(y_pred_ac_FS),output_dict=True)
+        accuracy_train_FS = ac_FS.score(X_train_FS, y_train)
+        accuracy_test_FS = ac_FS.score(X_test_FS, y_test)
+
+        report_R = classification_report(y_test, pd.DataFrame(y_pred_ac_R),output_dict=True)
+        accuracy_train_R = ac_R.score(X_train_R, y_train)
+        accuracy_test_R = ac_R.score(X_test_R, y_test)
+        
+        return [[ac_NR,ac_NR,y_pred_ac_NR,report_NR,accuracy_train_NR,accuracy_test_NR],[ac_FS,ac_FS,y_pred_ac_FS,report_FS,accuracy_train_FS,accuracy_test_FS],[ac_R,ac_R,y_pred_ac_R,report_R,accuracy_train_R,accuracy_test_R]]
+
+    # création des modèles de random forest
+    @st.cache(allow_output_mutation=True)
+    def get_data_rf():
+        parametres = {'max_depth': [1, 2, 3, 5, 7, 10],'n_estimators': [10, 30, 50, 100] }
+
+        forest_NR = RandomForestClassifier(random_state=0)
+        forest_FS = RandomForestClassifier(random_state=0)
+        forest_R = RandomForestClassifier(random_state=0)
+
+        grid_forest_NR = GridSearchCV(estimator=forest_NR, param_grid=parametres)
+        grid_forest_FS = GridSearchCV(estimator=forest_FS, param_grid=parametres)
+        grid_forest_R = GridSearchCV(estimator=forest_R, param_grid=parametres)
+
+        grid_forest_NR.fit(X_train_NR,y_train)
+        grid_forest_FS.fit(X_train_FS,y_train)
+        grid_forest_R.fit(X_train_R,y_train)
+
+        y_pred_forest_NR = grid_forest_NR.predict(X_test_NR)
+        y_pred_forest_FS = grid_forest_FS.predict(X_test_FS)
+        y_pred_forest_R  = grid_forest_R.predict(X_test_R)
+
+        report_NR = classification_report(y_test, pd.DataFrame(y_pred_forest_NR),output_dict=True)
+        accuracy_train_NR = grid_forest_NR.score(X_train_NR, y_train)
+        accuracy_test_NR = grid_forest_NR.score(X_test_NR, y_test)
+
+        report_FS = classification_report(y_test, pd.DataFrame(y_pred_forest_FS),output_dict=True)
+        accuracy_train_FS = grid_forest_FS.score(X_train_FS, y_train)
+        accuracy_test_FS = grid_forest_FS.score(X_test_FS, y_test)
+
+        report_R = classification_report(y_test, pd.DataFrame(y_pred_forest_R),output_dict=True)
+        accuracy_train_R = grid_forest_R.score(X_train_R, y_train)
+        accuracy_test_R = grid_forest_R.score(X_test_R, y_test)
+        
+        return [[forest_NR,grid_forest_NR,y_pred_forest_NR,report_NR,accuracy_train_NR,accuracy_test_NR],[forest_FS,grid_forest_FS,y_pred_forest_FS,report_FS,accuracy_train_FS,accuracy_test_FS],[forest_R,grid_forest_R,y_pred_forest_R,report_R,accuracy_train_R,accuracy_test_R]]
+
+    # création des modèles de xg boost
+    @st.cache(allow_output_mutation=True)
+    def get_data_xgboost():
+        
+        y_train_xgb = y_train.replace({'H': 1, 'D': 0, 'A': -1})
+        y_test_xgb  =  y_test.replace({'H': 1, 'D': 0, 'A': -1})
+
+        train_xgb = xgb.DMatrix(data=X_train, label=y_train_xgb)
+
+        train_xgb_NR = xgb.DMatrix(data=X_train_NR, label=y_train_xgb)
+        test_xgb_NR  = xgb.DMatrix(data=X_test_NR, label=y_test_xgb)
+
+        train_xgb_FS = xgb.DMatrix(data=X_train_FS, label=y_train_xgb)
+        test_xgb_FS  = xgb.DMatrix(data=X_test_FS, label=y_test_xgb)
+
+        train_xgb_R = xgb.DMatrix(data=X_train_R, label=y_train_xgb)
+        test_xgb_R  = xgb.DMatrix(data=X_test_R, label=y_test_xgb)
+        
+        param_CV = {'max_depth': range(2, 3, 5), 'num_boost_round': [10, 30, 50, 100], 'learning_rate': [0.005, 0.01, 0.05]}
+
+        xgb_ini_NR = xgb.XGBClassifier(objective='multi:softprob')
+        xgb_ini_FS = xgb.XGBClassifier(objective='multi:softprob')
+        xgb_ini_R = xgb.XGBClassifier(objective='multi:softprob')
+
+        grid_xgb_NR = GridSearchCV(estimator=xgb_ini_NR, param_grid=param_CV, scoring = 'f1', cv = 4)
+        grid_xgb_FS = GridSearchCV(estimator=xgb_ini_FS, param_grid=param_CV, scoring = 'f1', cv = 4)
+        grid_xgb_R = GridSearchCV(estimator=xgb_ini_R, param_grid=param_CV, scoring = 'f1', cv = 4)
+
+        grid_xgb_NR.fit(X_train_NR,y_train)
+        grid_xgb_FS.fit(X_train_FS,y_train)
+        grid_xgb_R.fit(X_train_R,y_train)
+
+        y_pred_u_xgb_NR = grid_xgb_NR.predict(X_test_NR)
+        y_pred_u_xgb_FS = grid_xgb_FS.predict(X_test_FS)
+        y_pred_u_xgb_R  = grid_xgb_R.predict(X_test_R)
+
+        y_pred_train_u_xgb_NR = grid_xgb_NR.predict(X_train_NR)
+        y_pred_train_u_xgb_FS = grid_xgb_FS.predict(X_train_FS)
+        y_pred_train_u_xgb_R  = grid_xgb_R.predict(X_train_R)
+        
+        report_NR = classification_report(y_test, pd.DataFrame(y_pred_u_xgb_NR),output_dict=True)
+        accuracy_train_NR = accuracy_score(y_train, y_pred_train_u_xgb_NR)
+        accuracy_test_NR = accuracy_score(y_test, y_pred_u_xgb_NR)
+
+        report_FS = classification_report(y_test, pd.DataFrame(y_pred_u_xgb_FS),output_dict=True)
+        accuracy_train_FS = accuracy_score(y_train, y_pred_train_u_xgb_FS)
+        accuracy_test_FS = accuracy_score(y_test, y_pred_u_xgb_FS)
+
+        report_R = classification_report(y_test, pd.DataFrame(y_pred_u_xgb_R),output_dict=True)
+        accuracy_train_R = accuracy_score(y_train, y_pred_train_u_xgb_R)
+        accuracy_test_R = accuracy_score(y_test, y_pred_u_xgb_R)
+        
+        return [[xgb_ini_NR,grid_xgb_NR,y_pred_u_xgb_NR,report_NR,accuracy_train_NR,accuracy_test_NR],[xgb_ini_FS,grid_xgb_FS,y_pred_u_xgb_FS,report_FS,accuracy_train_FS,accuracy_test_FS],[xgb_ini_R,grid_xgb_R,y_pred_u_xgb_R,report_R,accuracy_train_R,accuracy_test_R]]
+
+    # création des modèles de voting classifier
+    @st.cache(allow_output_mutation=True)
+    def get_data_vc():
+
+        parametres = {'max_depth': [1, 2, 3, 5, 7, 10],'n_estimators': [10, 30, 50, 100] }
+
+        vclf_NR = VotingClassifier(estimators=[('cfl', get_data_logreg()[0][1]), ('knn', get_data_knn()[0][1]), ('svm', get_data_svm()[0][1]), 
+                                       ('dtc_boost', get_data_boosting()[0][1]), ('Rforest', get_data_rf()[0][1]), ('XGB', get_data_xgboost()[0][1])], voting='soft')
+        vclf_FS = VotingClassifier(estimators=[('cfl', get_data_logreg()[1][1]), ('knn', get_data_knn()[1][1]), ('svm', get_data_svm()[1][1]), 
+                                       ('dtc_boost', get_data_boosting()[1][1]), ('Rforest', get_data_rf()[1][1]), ('XGB', get_data_xgboost()[1][1])], voting='soft')
+        vclf_R  = VotingClassifier(estimators=[ ('cfl', get_data_logreg()[2][1]), ('knn', get_data_knn()[2][1]) , ('svm', get_data_svm()[2][1]),
+                                        ('dtc_boost',get_data_boosting()[2][1]), ('Rforest', get_data_rf()[1][1]), ('XGB', get_data_xgboost()[2][1])], voting='soft')
+
+        # Performances:
+        vclf_NR.fit(X_train_NR, y_train)
+        vclf_FS.fit(X_train_FS, y_train)
+        vclf_R.fit(X_train_R, y_train)
+
+        y_pred_vcfl_NR = vclf_NR.predict(X_test_NR)
+        y_pred_vcfl_FS = vclf_FS.predict(X_test_FS)
+        y_pred_vcfl_R  = vclf_R.predict(X_test_R)
+
+        report_NR = classification_report(y_test, pd.DataFrame(y_pred_vcfl_NR),output_dict=True)
+        accuracy_train_NR = vclf_NR.score(X_train_NR, y_train)
+        accuracy_test_NR = vclf_NR.score(X_test_NR, y_test)
+
+        report_FS = classification_report(y_test, pd.DataFrame(y_pred_vcfl_FS),output_dict=True)
+        accuracy_train_FS = vclf_FS.score(X_train_FS, y_train)
+        accuracy_test_FS = vclf_FS.score(X_test_FS, y_test)
+
+        report_R = classification_report(y_test, pd.DataFrame(y_pred_vcfl_R),output_dict=True)
+        accuracy_train_R = vclf_R.score(X_train_R, y_train)
+        accuracy_test_R = vclf_R.score(X_test_R, y_test)
+        
+        return [[vclf_NR,vclf_NR,y_pred_vcfl_NR,report_NR,accuracy_train_NR,accuracy_test_NR],[vclf_FS,vclf_FS,y_pred_vcfl_FS,report_FS,accuracy_train_FS,accuracy_test_FS],[vclf_R,vclf_R,y_pred_vcfl_R,report_R,accuracy_train_R,accuracy_test_R]]
 
 
     option = st.selectbox(
@@ -429,8 +588,60 @@ def app():
             dectR = get_data_dectree()[2]
 
         create_dashboard(dectNR,dectFS,dectR)
+    
+    if option == 'Boosting':
+
+        with st.spinner('Calculs en cours'):
+            
+            boostingNR = get_data_boosting()[0]
+            boostingFS = get_data_boosting()[1]
+            boostingR = get_data_boosting()[2]
+
+        create_dashboard(boostingNR,boostingFS,boostingR)
+
+    if option == 'Random Forest':
+
+        with st.spinner('Calculs en cours'):
+            
+            forestNR = get_data_rf()[0]
+            forestFS = get_data_rf()[1]
+            forestR = get_data_rf()[2]
+
+        create_dashboard(forestNR,forestFS,forestR)
+    
+    if option == 'XG Boost':
+
+        with st.spinner('Calculs en cours'):
+            
+            xgboostNR = get_data_xgboost()[0]
+            xgboostFS = get_data_xgboost()[1]
+            xgboostR = get_data_xgboost()[2]
+
+        create_dashboard(xgboostNR,xgboostFS,xgboostR)
+    
+    if option == 'Voting Classifier':
+
+        with st.spinner('Calculs en cours'):
+            
+            vcNR = get_data_vc()[0]
+            vcFS = get_data_vc()[1]
+            vcR = get_data_vc()[2]
+
+        create_dashboard(vcNR,vcFS,vcR)
 
     st.subheader('Résumé des performances')
+
+    st.write("Accuracy")
+
+    st.write("F1 Score")
+
+
+
+
+
+
+
+
 # get_data_svm
         
 
