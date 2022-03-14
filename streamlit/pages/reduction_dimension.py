@@ -147,7 +147,7 @@ def app():
 ######################################################################################################################################## 
     st.markdown("## Transformation du dataset")
     st.markdown("Parmis les differentes possibilités: PCA / LDA / Manifolds, la réduction via la méthode PCA a été retenue:")
-    st.markdown("* Dataset fortement réduit ")
+    st.markdown("* Dataset réduit ")
     st.markdown("* Bonne variance expliquée ")
     from sklearn.decomposition import PCA
 
