@@ -3,7 +3,8 @@ import pandas as pd
 import seaborn as sns
 import streamlit as st
 import matplotlib.pyplot as plt
-from sklearn.metrics import classification_report
+from collections import Counter
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix, f1_score
 
 import os
 os.chdir('C:/Users/LANDRYGOL/Documents/GitHub/Bookmakerspy/streamlit')
@@ -12,10 +13,26 @@ sns.set_theme(style = 'white')
 sns.set_palette('pastel')
 
 def app():
-
+    
     df = pd.read_csv('./data/df_results.csv', index_col = 0)
     df.rename(columns={'FTHG': 'home_goal', 'FTAG': 'away_goal'}, inplace = 'True')
     df['total_goal'] = df['home_goal'] + df['away_goal']
+    
+    coeffs = pd.DataFrame([[-0.0074, 0.0099, -0.5456, 0.0085, 0.1875, 0.0175, 0.0240, -0.1687, -0.0200, 0.1342],
+                          [-0.0033, 0.0101, -2.0334, 0.0279, -0.2725, 0.0350, 0.0446, 0.1306, 0.1001, 0.0300]],
+                          index = ["Home", "Away"],
+                          columns = pd.Index(['aerial_won', 'ontarget_scoring_att', 'pass', 
+                                              'possession_percentage', 'team_rating', 'won_contest', 'won_corners', 
+                                              'midfielder_player_rating', 'forward_player_rating', 'FTG_mean'], name = 'Model'))
+    
+    
+    features = pd.DataFrame([[19.33333, 7, 0.83112, 56.83333, 6.85429, 14.33333, 9, 6.93083, 7.68778, 1.33333],
+                             [17.66667, 4, 0.82617, 63.76667, 6.73786, 10.66667, 4, 6.91444, 7.14444, 1.33333]],
+                            index = ["Chelsea", "Liverpool"],
+                            columns = pd.Index(['aerial_won', 'ontarget_scoring_att', 'pass', 
+                                                'possession_percentage', 'team_rating', 'won_contest', 'won_corners', 
+                                                'midfielder_player_rating', 'forward_player_rating', 'FTG_mean'], name = 'Model'))
+    
 
     st.header('Simulation par un modèle de Poisson')
     st.caption('Rappels sur le nombre de buts par match')
@@ -42,27 +59,11 @@ def app():
         st.pyplot(fig2)
     
     
-    st.caption('Les coefficients du modèle sont les suivants:')
-    
-    coeffs = pd.DataFrame([[-0.0074, 0.0099, -0.5456, 0.0085, 0.1875, 0.0175, 0.0240, -0.1687, -0.0200, 0.1342],
-                          [-0.0033, 0.0101, -2.0334, 0.0279, -0.2725, 0.0350, 0.0446, 0.1306, 0.1001, 0.0300]],
-                          index = ["Home", "Away"],
-                          columns = pd.Index(['aerial_won', 'ontarget_scoring_att', 'pass', 
-                                              'possession_percentage', 'team_rating', 'won_contest', 'won_corners', 
-                                              'midfielder_player_rating', 'forward_player_rating', 'FTG_mean'], name = 'Model'))
-    
+    st.caption('Les coefficients du modèle sont les suivants:')    
     st.dataframe(coeffs.style.format("{:20,.4f}"))
     
-    
-    st.caption("Exemple d'application: match Chelsea - Liverpool du 6 Mai 2018")
-    
-    features = pd.DataFrame([[19.33333, 7, 0.83112, 56.83333, 6.85429, 14.33333, 9, 6.93083, 7.68778, 1.33333],
-                             [17.66667, 4, 0.82617, 63.76667, 6.73786, 10.66667, 4, 6.91444, 7.14444, 1.33333]],
-                            index = ["Chelsea", "Liverpool"],
-                            columns = pd.Index(['aerial_won', 'ontarget_scoring_att', 'pass', 
-                                                'possession_percentage', 'team_rating', 'won_contest', 'won_corners', 
-                                                'midfielder_player_rating', 'forward_player_rating', 'FTG_mean'], name = 'Model'))
-    
+        
+    st.caption("Exemple d'application: match Chelsea - Liverpool du 6 Mai 2018")   
     st.dataframe(features.style.format("{:20,.5f}"))
     
     
@@ -172,3 +173,61 @@ def app():
         st.dataframe(proba.style.apply(cell_color_probability, axis = None).format("{:20,.2f}"))
     else:
         st.dataframe(scorelines.style.apply(cell_color, axis = None).format("{:20,.2f}"))
+        
+    
+    @st.cache
+    def get_data_poisson():
+        
+        data = pd.read_csv('./data/df_results.csv', index_col = 0)
+        data.rename(columns={'FTHG': 'home_goal', 'FTAG': 'away_goal'}, inplace = 'True')
+        data['total_goal'] = data['home_goal'] + data['away_goal']
+        
+        nb_simu = 1000
+
+        feats = {i:[] for i in ["home", "away"]}
+        simu = {i: pd.DataFrame(index = data.index, columns = range(nb_simu)) for i in ["home", "away", "score"]}
+        predictions = pd.DataFrame(columns = ['Score', 'PredictScore','ProbaHome', 'ProbaDraw', 'ProbaAway', 'PredictProba'], index = data.index)
+
+        for i in ['home', 'away']:
+            feats[i] = [i + '_aerial_won', i + '_ontarget_scoring_att', i + '_pass', i + '_possession_percentage', i + '_team_rating', 
+              i + '_won_contest', i + '_won_corners', 'midfielder_' + i + '_player_rating', 'forward_' + i + '_player_rating', 'FT' + i.upper()[0] + 'G_mean']
+            data['λ_' + i] = np.exp(np.sum(np.multiply(data[feats[i]], coeffs.loc[i.capitalize()]), axis = 1))
+
+            for j in data.index:
+                simu[i].loc[j, 0:nb_simu] = np.random.poisson(data['λ_' + i][j] , nb_simu)
+
+        for i in data.index:
+            simu["score"].loc[i, 0:nb_simu] = [str(u) + "-" + str(v) for (u, v) in zip (simu["home"].loc[i, 0:nb_simu], simu["away"].loc[i, 0:nb_simu])]
+            predictions.loc[i]['Score'] = list(Counter(simu["score"].loc[i]).keys())[list(Counter(simu["score"].loc[i]).values()).index(Counter(simu["score"].loc[i]).most_common(1)[0][1])]
+            if int(predictions['Score'][i].split("-")[0]) > int(predictions['Score'][i].split("-")[1]):
+                predictions['PredictScore'][i] = "H"
+            if int(predictions['Score'][i].split("-")[0]) == int(predictions['Score'][i].split("-")[1]):
+                predictions['PredictScore'][i] = "D"
+            if int(predictions['Score'][i].split("-")[0]) < int(predictions['Score'][i].split("-")[1]):
+                predictions['PredictScore'][i] = "A"
+
+            score = pd.DataFrame(0, columns = range(9), index = range(9))
+
+            probaH = 0
+            probaD = 0
+            probaA = 0
+
+            for h in range(9):
+                for a in range(9):
+                    score[h][a] = sum([1 if (u == h) & (v == a) else 0 for (u, v) in zip (simu['home'].loc[i, :], simu['away'].loc[60, :])])
+  
+            predictions.loc[i][['ProbaHome', 'ProbaDraw', 'ProbaAway']] = [sum(sum(list(np.tril(score, -1)))), sum(list(np.diag(score))), sum(sum(list(np.triu(score, 1))))]
+            predictions.loc[i][['ProbaHome', 'ProbaDraw', 'ProbaAway']] = predictions.loc[i][['ProbaHome', 'ProbaDraw', 'ProbaAway']] / 10
+
+            if max(predictions.loc[i][['ProbaHome', 'ProbaDraw', 'ProbaAway']]) == predictions.loc[i]['ProbaHome']:
+                predictions.loc[i]['PredictProba'] = 'H'
+            if max(predictions.loc[i][['ProbaHome', 'ProbaDraw', 'ProbaAway']]) == predictions.loc[i]['ProbaDraw']:
+                predictions.loc[i]['PredictProba'] = 'D'
+            if max(predictions.loc[i][['ProbaHome', 'ProbaDraw', 'ProbaAway']]) == predictions.loc[i]['ProbaAway']:
+                predictions.loc[i]['PredictProba'] = 'A'
+
+        data = data.merge(predictions, left_index = True, right_index = True)
+            
+        return data
+    
+    data = get_data_poisson()
