@@ -230,4 +230,110 @@ def app():
             
         return data
     
-    data = get_data_poisson()
+    
+    
+    df_poisson = get_data_poisson()
+    
+    def create_dashboard(data):
+
+        y_train = data.loc[data["season"] != "2017_2018"]["FTR"]
+        y_train_pred_score = data.loc[data["season"] != "2017_2018"]["PredictScore"]
+        y_train_pred_proba = data.loc[data["season"] != "2017_2018"]["PredictProba"]
+
+        y_test = data.loc[data["season"] == "2017_2018"]["FTR"]
+        y_test_pred_score = data.loc[data["season"] == "2017_2018"]["PredictScore"]
+        y_test_pred_proba = data.loc[data["season"] == "2017_2018"]["PredictProba"]
+        
+        col1, col2, col3 = st.columns([1, .2, 1])
+ 
+        with col1:
+            st.write('Prédictions via le score le plus probable')
+            
+            f1_score_s = list(f1_score(y_test, y_test_pred_score, average = None))
+            conf_matrix_s = confusion_matrix(y_test, y_test_pred_score)
+
+            fig, ax = plt.subplots()
+            ax.matshow(conf_matrix_s, cmap = plt.cm.Blues, alpha=0.3)
+            for i in range(conf_matrix_s.shape[0]):
+                for j in range(conf_matrix_s.shape[1]):
+                    ax.text(x = j, y = i, s = conf_matrix_s[i, j], va = 'center', ha = 'center', fontsize = 18)
+            
+            labels = ['Away', 'Draw', 'Home']
+            ax.set_xticklabels([''] + labels)
+            ax.set_yticklabels([''] + labels)
+            plt.xticks(fontsize = 14)
+            plt.yticks(fontsize = 14)
+            ax.xaxis.set_label_position('top')
+            plt.xlabel('Predicted', fontsize = 16)
+            plt.ylabel('Real', fontsize = 16)
+            st.pyplot(fig)
+
+            d = {'Accuracy Train': [round(accuracy_score(y_train, y_train_pred_score), 2)], 'Accuracy Test': [round(accuracy_score(y_test, y_test_pred_score), 2)]}
+            
+            hide_table_row_index = """
+            <style>
+            tbody th {display:none}
+            .blank {display:none}
+            </style>
+            """
+            st.markdown(hide_table_row_index, unsafe_allow_html = True)
+            st.table(pd.DataFrame(d).style.format("{:.2}"))
+
+            st.caption("F1 Score")
+            fig, ax = plt.subplots()
+            
+            ax.bar(x = ['Away', 'Draw', 'Home'], height = f1_score_s, color = ["#a1c9f4", "#8de5a1", "#ffb482"])
+            ax.spines['right'].set_visible(False)
+            ax.spines['top'].set_visible(False) 
+            plt.yticks(fontsize = 16)
+            plt.xticks(fontsize = 16)
+            st.pyplot(fig)
+
+            
+        with col3:
+            
+            st.write('Dataset sélection de features')
+
+            f1_score_p = list(f1_score(y_test, y_test_pred_proba, average = None))
+            conf_matrix_p = confusion_matrix(y_test, y_test_pred_proba)
+            
+
+            fig, ax = plt.subplots()
+            ax.matshow(conf_matrix_p, cmap = plt.cm.Blues, alpha = 0.3)
+            for i in range(conf_matrix_p.shape[0]):
+                for j in range(conf_matrix_p.shape[1]):
+                    ax.text(x = j, y = i, s = conf_matrix_p[i, j], va = 'center', ha = 'center', fontsize = 18)
+            
+            labels = ['Away', 'Draw', 'Home']
+            ax.set_xticklabels([''] + labels)
+            ax.set_yticklabels([''] + labels)
+            plt.xticks(fontsize = 14)
+            plt.yticks(fontsize = 14)
+            ax.xaxis.set_label_position('top')
+            plt.xlabel('Predicted', fontsize = 16)
+            plt.ylabel('Real', fontsize = 16)
+            st.pyplot(fig)
+
+            d = {'Accuracy Train': [round(accuracy_score(y_train, y_train_pred_proba), 2)], 'Accuracy Test': [round(accuracy_score(y_test, y_test_pred_proba), 2)]}
+            
+            hide_table_row_index = """
+            <style>
+            tbody th {display:none}
+            .blank {display:none}
+            </style>
+            """
+            st.markdown(hide_table_row_index, unsafe_allow_html = True)
+            st.table(pd.DataFrame(d).style.format("{:.2}"))
+
+            
+            st.caption("F1 Score")
+            fig, ax = plt.subplots()
+            ax.bar(x = ['Away','Draw','Home'], height = f1_score_p, color = ["#a1c9f4", "#8de5a1", "#ffb482"])
+            ax.spines['right'].set_visible(False)
+            ax.spines['top'].set_visible(False) 
+            plt.yticks(fontsize = 16)
+            plt.xticks(fontsize = 16)
+            st.pyplot(fig)
+            
+    create_dashboard(df_poisson)
+    
