@@ -7,7 +7,6 @@ from collections import Counter
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix, f1_score
 
 import os
-os.chdir('C:/Users/LANDRYGOL/Documents/GitHub/Bookmakerspy/streamlit')
 
 sns.set_theme(style = 'white')
 sns.set_palette('pastel')
