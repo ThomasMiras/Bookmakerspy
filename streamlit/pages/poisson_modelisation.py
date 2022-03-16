@@ -236,7 +236,7 @@ def app():
     
     df_poisson = get_data_poisson()
     
-    def create_dashboard(data):
+    def create_dashboard_result(data):
 
         y_train = data.loc[data["season"] != "2017_2018"]["FTR"]
         y_train_pred_score = data.loc[data["season"] != "2017_2018"]["PredictScore"]
@@ -337,5 +337,114 @@ def app():
             plt.xticks(fontsize = 16)
             st.pyplot(fig)
             
-    create_dashboard(df_poisson)
+    create_dashboard_result(df_poisson)
+    
+    
+    def create_dashboard_scoreline(data):
+
+        y_train_home = data.loc[data["season"] != "2017_2018"]["home_goal"]
+        y_train_pred_home = data.loc[data["season"] != "2017_2018"]["HomeGoalsPrediction"]
+        
+        y_test_home = data.loc[data["season"] == "2017_2018"]["home_goal"]
+        y_test_pred_home = data.loc[data["season"] == "2017_2018"]["HomeGoalsPrediction"]
+        
+
+        y_train_away = data.loc[data["season"] != "2017_2018"]["away_goal"]
+        y_train_pred_away = data.loc[data["season"] != "2017_2018"]["AwayGoalsPrediction"]
+        
+        y_test_away = data.loc[data["season"] == "2017_2018"]["away_goal"]
+        y_test_pred_away = data.loc[data["season"] == "2017_2018"]["AwayGoalsPrediction"]
+        
+        col1, col2, col3 = st.columns([1, .2, 1])
+ 
+        with col1:
+            st.write("Buts de l'équipe à domicile")
+            
+            f1_score_home = list(f1_score(y_test_home, y_test_pred_home, average = None))
+            conf_matrix_home = confusion_matrix(y_test_home, y_test_pred_home)
+
+            fig, ax = plt.subplots()
+            ax.matshow(conf_matrix_home, cmap = plt.cm.Blues, alpha=0.3)
+            for i in range(conf_matrix_home.shape[0]):
+                for j in range(conf_matrix_home.shape[1]):
+                    ax.text(x = j, y = i, s = conf_matrix_s[i, j], va = 'center', ha = 'center', fontsize = 18)
+            
+            labels = range(9)
+            ax.set_xticklabels([''] + labels)
+            ax.set_yticklabels([''] + labels)
+            plt.xticks(fontsize = 14)
+            plt.yticks(fontsize = 14)
+            ax.xaxis.set_label_position('top')
+            plt.xlabel('Predicted', fontsize = 16)
+            plt.ylabel('Real', fontsize = 16)
+            st.pyplot(fig)
+
+            d = {'Accuracy Train': [round(accuracy_score(y_train_home, y_train_pred_home), 2)], 'Accuracy Test': [round(accuracy_score(y_test_home, y_test_pred_home), 2)]}
+            
+            hide_table_row_index = """
+            <style>
+            tbody th {display:none}
+            .blank {display:none}
+            </style>
+            """
+            st.markdown(hide_table_row_index, unsafe_allow_html = True)
+            st.table(pd.DataFrame(d).style.format("{:.2}"))
+
+            st.caption("F1 Score")
+            fig, ax = plt.subplots()
+            
+            ax.bar(x = range(9), height = f1_score_home)
+            ax.spines['right'].set_visible(False)
+            ax.spines['top'].set_visible(False) 
+            plt.yticks(fontsize = 16)
+            plt.xticks(fontsize = 16)
+            st.pyplot(fig)
+
+            
+        with col3:
+            
+            st.write("Buts de l'équipe à l'extérieur")
+
+            f1_score_away = list(f1_score(y_test_away, y_test_pred_away, average = None))
+            conf_matrix_away = confusion_matrix(y_test_away, y_test_pred_away)
+            
+
+            fig, ax = plt.subplots()
+            ax.matshow(conf_matrix_away, cmap = plt.cm.Blues, alpha = 0.3)
+            for i in range(conf_matrix_away.shape[0]):
+                for j in range(conf_matrix_away.shape[1]):
+                    ax.text(x = j, y = i, s = conf_matrix_away[i, j], va = 'center', ha = 'center', fontsize = 18)
+            
+            labels = range(9)
+            ax.set_xticklabels([''] + labels)
+            ax.set_yticklabels([''] + labels)
+            plt.xticks(fontsize = 14)
+            plt.yticks(fontsize = 14)
+            ax.xaxis.set_label_position('top')
+            plt.xlabel('Predicted', fontsize = 16)
+            plt.ylabel('Real', fontsize = 16)
+            st.pyplot(fig)
+
+            d = {'Accuracy Train': [round(accuracy_score(y_train_away, y_train_pred_away), 2)], 'Accuracy Test': [round(accuracy_score(y_test_away, y_test_pred_away), 2)]}
+            
+            hide_table_row_index = """
+            <style>
+            tbody th {display:none}
+            .blank {display:none}
+            </style>
+            """
+            st.markdown(hide_table_row_index, unsafe_allow_html = True)
+            st.table(pd.DataFrame(d).style.format("{:.2}"))
+
+            
+            st.caption("F1 Score")
+            fig, ax = plt.subplots()
+            ax.bar(x = range(9), height = f1_score_away)
+            ax.spines['right'].set_visible(False)
+            ax.spines['top'].set_visible(False) 
+            plt.yticks(fontsize = 16)
+            plt.xticks(fontsize = 16)
+            st.pyplot(fig)
+            
+    create_dashboard_scoreline(df_poisson)
     
