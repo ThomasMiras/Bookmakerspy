@@ -186,7 +186,7 @@ def app():
 
         feats = {i:[] for i in ["home", "away"]}
         simu = {i: pd.DataFrame(index = data.index, columns = range(nb_simu)) for i in ["home", "away", "score"]}
-        predictions = pd.DataFrame(columns = ['Score', 'PredictScore','ProbaHome', 'ProbaDraw', 'ProbaAway', 'PredictProba'], index = data.index)
+        predictions = pd.DataFrame(columns = ['Score', 'HomeGoalsPrediction', 'AwayGoalsPrediction', 'PredictScore','ProbaHome', 'ProbaDraw', 'ProbaAway', 'PredictProba'], index = data.index)
 
         for i in ['home', 'away']:
             feats[i] = [i + '_aerial_won', i + '_ontarget_scoring_att', i + '_pass', i + '_possession_percentage', i + '_team_rating', 
@@ -199,6 +199,8 @@ def app():
         for i in data.index:
             simu["score"].loc[i, 0:nb_simu] = [str(u) + "-" + str(v) for (u, v) in zip (simu["home"].loc[i, 0:nb_simu], simu["away"].loc[i, 0:nb_simu])]
             predictions.loc[i]['Score'] = list(Counter(simu["score"].loc[i]).keys())[list(Counter(simu["score"].loc[i]).values()).index(Counter(simu["score"].loc[i]).most_common(1)[0][1])]
+            predictions.loc[i]['HomeGoalsPrediction'] = int(predictions['Score'][i].split("-")[0])
+            predictions.loc[i]['AwayGoalsPrediction'] = int(predictions['Score'][i].split("-")[1])
             if int(predictions['Score'][i].split("-")[0]) > int(predictions['Score'][i].split("-")[1]):
                 predictions['PredictScore'][i] = "H"
             if int(predictions['Score'][i].split("-")[0]) == int(predictions['Score'][i].split("-")[1]):
