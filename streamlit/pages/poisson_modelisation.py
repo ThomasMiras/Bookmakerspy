@@ -292,7 +292,7 @@ def app():
             
         with col3:
             
-            st.write('Dataset sélection de features')
+            st.write('Prédictions via la somme des probabilités')
 
             f1_score_p = list(f1_score(y_test, y_test_pred_proba, average = None))
             conf_matrix_p = confusion_matrix(y_test, y_test_pred_proba)
