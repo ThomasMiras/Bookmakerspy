@@ -369,7 +369,7 @@ def app():
                 for j in range(conf_matrix_home.shape[1]):
                     ax.text(x = j, y = i, s = conf_matrix_home[i, j], va = 'center', ha = 'center', fontsize = 18)
             
-            labels = range(conf_matrix_home.shape[0])
+            labels = list(np.arange(conf_matrix_home.shape[0]))
             ax.set_xticklabels([''] + labels)
             ax.set_yticklabels([''] + labels)
             plt.xticks(fontsize = 14)
@@ -415,7 +415,7 @@ def app():
                 for j in range(conf_matrix_away.shape[1]):
                     ax.text(x = j, y = i, s = conf_matrix_away[i, j], va = 'center', ha = 'center', fontsize = 18)
             
-            labels = range(conf_matrix_away.shape[0])
+            labels = list(np.arange(conf_matrix_away.shape[0]))
             ax.set_xticklabels([''] + labels)
             ax.set_yticklabels([''] + labels)
             plt.xticks(fontsize = 14)
