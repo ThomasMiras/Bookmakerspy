@@ -360,16 +360,16 @@ def app():
         with col1:
             st.write("Buts de l'équipe à domicile")
             
-            f1_score_home = list(f1_score(y_test_home, y_test_pred_home, average = None))
-            conf_matrix_home = confusion_matrix(y_test_home, y_test_pred_home)
+            f1_score_home = list(f1_score(list(y_test_home), list(y_test_pred_home), average = None))
+            conf_matrix_home = confusion_matrix(list(y_test_home), list(y_test_pred_home))
 
             fig, ax = plt.subplots()
             ax.matshow(conf_matrix_home, cmap = plt.cm.Blues, alpha=0.3)
             for i in range(conf_matrix_home.shape[0]):
                 for j in range(conf_matrix_home.shape[1]):
-                    ax.text(x = j, y = i, s = conf_matrix_s[i, j], va = 'center', ha = 'center', fontsize = 18)
+                    ax.text(x = j, y = i, s = conf_matrix_home[i, j], va = 'center', ha = 'center', fontsize = 18)
             
-            labels = range(9)
+            labels = range(conf_matrix_home.shape[0])
             ax.set_xticklabels([''] + labels)
             ax.set_yticklabels([''] + labels)
             plt.xticks(fontsize = 14)
@@ -379,7 +379,7 @@ def app():
             plt.ylabel('Real', fontsize = 16)
             st.pyplot(fig)
 
-            d = {'Accuracy Train': [round(accuracy_score(y_train_home, y_train_pred_home), 2)], 'Accuracy Test': [round(accuracy_score(y_test_home, y_test_pred_home), 2)]}
+            d = {'Accuracy Train': [round(accuracy_score(list(y_train_home), list(y_train_pred_home)), 2)], 'Accuracy Test': [round(accuracy_score(list(y_test_home), list(y_test_pred_home)), 2)]}
             
             hide_table_row_index = """
             <style>
@@ -393,7 +393,7 @@ def app():
             st.caption("F1 Score")
             fig, ax = plt.subplots()
             
-            ax.bar(x = range(9), height = f1_score_home)
+            ax.bar(x = range(conf_matrix_home.shape[0]), height = f1_score_home)
             ax.spines['right'].set_visible(False)
             ax.spines['top'].set_visible(False) 
             plt.yticks(fontsize = 16)
@@ -405,8 +405,8 @@ def app():
             
             st.write("Buts de l'équipe à l'extérieur")
 
-            f1_score_away = list(f1_score(y_test_away, y_test_pred_away, average = None))
-            conf_matrix_away = confusion_matrix(y_test_away, y_test_pred_away)
+            f1_score_away = list(f1_score(list(y_test_away), list(y_test_pred_away), average = None))
+            conf_matrix_away = confusion_matrix(list(y_test_away), list(y_test_pred_away))
             
 
             fig, ax = plt.subplots()
@@ -415,7 +415,7 @@ def app():
                 for j in range(conf_matrix_away.shape[1]):
                     ax.text(x = j, y = i, s = conf_matrix_away[i, j], va = 'center', ha = 'center', fontsize = 18)
             
-            labels = range(9)
+            labels = range(conf_matrix_away.shape[0])
             ax.set_xticklabels([''] + labels)
             ax.set_yticklabels([''] + labels)
             plt.xticks(fontsize = 14)
@@ -425,7 +425,7 @@ def app():
             plt.ylabel('Real', fontsize = 16)
             st.pyplot(fig)
 
-            d = {'Accuracy Train': [round(accuracy_score(y_train_away, y_train_pred_away), 2)], 'Accuracy Test': [round(accuracy_score(y_test_away, y_test_pred_away), 2)]}
+            d = {'Accuracy Train': [round(accuracy_score(list(y_train_away), list(y_train_pred_away)), 2)], 'Accuracy Test': [round(accuracy_score(list(y_test_away), list(y_test_pred_away)), 2)]}
             
             hide_table_row_index = """
             <style>
@@ -439,7 +439,7 @@ def app():
             
             st.caption("F1 Score")
             fig, ax = plt.subplots()
-            ax.bar(x = range(9), height = f1_score_away)
+            ax.bar(x = range(conf_matrix_away.shape[0]), height = f1_score_away)
             ax.spines['right'].set_visible(False)
             ax.spines['top'].set_visible(False) 
             plt.yticks(fontsize = 16)
