@@ -1,0 +1,2067 @@
+{
+    "1190174":{
+        "13":{
+            "team_details":{
+                "team_id":"13",
+                "team_name":"Arsenal",
+                "team_rating":"7.30714285714286",
+                "date":"11/08/2017"
+            },
+            "aggregate_stats":{
+                "fk_foul_lost":"9",
+                "won_contest":"16",
+                "possession_percentage":"70",
+                "total_throws":"21",
+                "att_miss_high_left":"1",
+                "blocked_scoring_att":"8",
+                "total_scoring_att":"27",
+                "att_sv_low_left":"1",
+                "total_tackle":"23",
+                "att_miss_high_right":"2",
+                "aerial_won":"18",
+                "att_miss_right":"3",
+                "att_sv_low_centre":"2",
+                "att_miss_high":"1",
+                "aerial_lost":"18",
+                "att_sv_low_right":"2",
+                "total_pass":"632",
+                "won_corners":"9",
+                "shot_off_target":"9",
+                "ontarget_scoring_att":"10",
+                "goals":"4",
+                "att_miss_left":"2",
+                "att_goal_low_left":"2",
+                "total_offside":"5",
+                "att_sv_high_centre":"1",
+                "accurate_pass":"538",
+                "att_goal_high_left":"1",
+                "att_goal_low_centre":"1"
+            },
+            "Player_stats":{
+                "Petr Cech":{
+                    "player_details":{
+                        "player_id":"6775",
+                        "player_name":"Petr Cech",
+                        "player_position_value":"1",
+                        "player_position_info":"GK",
+                        "player_rating":"5.78"
+                    },
+                    "Match_stats":{
+                        "good_high_claim":"1",
+                        "touches":"27",
+                        "total_tackle":"1",
+                        "total_pass":"20",
+                        "formation_place":"1",
+                        "accurate_pass":"16"
+                    }
+                },
+                "Sead Kolasinac":{
+                    "player_details":{
+                        "player_id":"110260",
+                        "player_name":"Sead Kolasinac",
+                        "player_position_value":"2",
+                        "player_position_info":"DC",
+                        "player_rating":"7.55"
+                    },
+                    "Match_stats":{
+                        "touches":"85",
+                        "won_contest":"1",
+                        "total_tackle":"4",
+                        "fouls":"1",
+                        "total_pass":"70",
+                        "formation_place":"4",
+                        "accurate_pass":"59",
+                        "total_scoring_att":"1",
+                        "goal_assist":"1"
+                    }
+                },
+                "Rob Holding":{
+                    "player_details":{
+                        "player_id":"288795",
+                        "player_name":"Rob Holding",
+                        "player_position_value":"2",
+                        "player_position_info":"DC",
+                        "player_rating":"6.53"
+                    },
+                    "Match_stats":{
+                        "touches":"77",
+                        "total_tackle":"1",
+                        "aerial_lost":"1",
+                        "total_pass":"59",
+                        "fouls":"2",
+                        "aerial_won":"2",
+                        "formation_place":"6",
+                        "accurate_pass":"49"
+                    }
+                },
+                "Nacho Monreal":{
+                    "player_details":{
+                        "player_id":"23072",
+                        "player_name":"Nacho Monreal",
+                        "player_position_value":"2",
+                        "player_position_info":"DC",
+                        "player_rating":"7.3"
+                    },
+                    "Match_stats":{
+                        "touches":"73",
+                        "total_tackle":"2",
+                        "aerial_lost":"3",
+                        "total_pass":"57",
+                        "aerial_won":"3",
+                        "formation_place":"5",
+                        "accurate_pass":"54"
+                    }
+                },
+                "Alex Oxlade Chamberlain":{
+                    "player_details":{
+                        "player_id":"84146",
+                        "player_name":"Alex Oxlade Chamberlain",
+                        "player_position_value":"3",
+                        "player_position_info":"DML",
+                        "player_rating":"9.23"
+                    },
+                    "Match_stats":{
+                        "touches":"97",
+                        "won_contest":"8",
+                        "total_tackle":"3",
+                        "aerial_lost":"2",
+                        "man_of_the_match":"1",
+                        "total_pass":"51",
+                        "fouls":"1",
+                        "blocked_scoring_att":"2",
+                        "aerial_won":"3",
+                        "formation_place":"3",
+                        "accurate_pass":"40",
+                        "total_scoring_att":"6"
+                    }
+                },
+                "Granit Xhaka":{
+                    "player_details":{
+                        "player_id":"89401",
+                        "player_name":"Granit Xhaka",
+                        "player_position_value":"3",
+                        "player_position_info":"MC",
+                        "player_rating":"7.48"
+                    },
+                    "Match_stats":{
+                        "touches":"117",
+                        "won_contest":"1",
+                        "error_lead_to_goal":"1",
+                        "aerial_lost":"2",
+                        "total_tackle":"1",
+                        "total_pass":"99",
+                        "fouls":"1",
+                        "blocked_scoring_att":"2",
+                        "formation_place":"8",
+                        "accurate_pass":"81",
+                        "total_scoring_att":"4",
+                        "goal_assist":"2"
+                    }
+                },
+                "Héctor Bellerín":{
+                    "player_details":{
+                        "player_id":"125211",
+                        "player_name":"Héctor Bellerín",
+                        "player_position_value":"3",
+                        "player_position_info":"DMR",
+                        "player_rating":"7.01"
+                    },
+                    "Match_stats":{
+                        "touches":"85",
+                        "won_contest":"1",
+                        "total_tackle":"3",
+                        "aerial_lost":"4",
+                        "total_pass":"60",
+                        "fouls":"1",
+                        "aerial_won":"3",
+                        "formation_place":"2",
+                        "accurate_pass":"53",
+                        "total_scoring_att":"1"
+                    }
+                },
+                "Mohamed Elneny":{
+                    "player_details":{
+                        "player_id":"125209",
+                        "player_name":"Mohamed Elneny",
+                        "player_position_value":"3",
+                        "player_position_info":"MC",
+                        "player_rating":"6.89"
+                    },
+                    "Match_stats":{
+                        "touches":"87",
+                        "total_tackle":"4",
+                        "aerial_lost":"1",
+                        "total_pass":"72",
+                        "formation_place":"7",
+                        "accurate_pass":"65",
+                        "total_scoring_att":"1",
+                        "goal_assist":"1"
+                    }
+                },
+                "Danny Welbeck":{
+                    "player_details":{
+                        "player_id":"39308",
+                        "player_name":"Danny Welbeck",
+                        "player_position_value":"4",
+                        "player_position_info":"AMC",
+                        "player_rating":"7.7"
+                    },
+                    "Match_stats":{
+                        "touches":"37",
+                        "won_contest":"2",
+                        "total_tackle":"1",
+                        "aerial_lost":"1",
+                        "total_pass":"21",
+                        "fouls":"1",
+                        "blocked_scoring_att":"2",
+                        "six_yard_block":"1",
+                        "aerial_won":"1",
+                        "formation_place":"11",
+                        "accurate_pass":"16",
+                        "total_scoring_att":"3",
+                        "goals":"1"
+                    }
+                },
+                "Alexandre Lacazette":{
+                    "player_details":{
+                        "player_id":"73078",
+                        "player_name":"Alexandre Lacazette",
+                        "player_position_value":"4",
+                        "player_position_info":"FW",
+                        "player_rating":"8.47"
+                    },
+                    "Match_stats":{
+                        "touches":"39",
+                        "won_contest":"1",
+                        "total_tackle":"2",
+                        "aerial_lost":"3",
+                        "total_pass":"21",
+                        "fouls":"2",
+                        "blocked_scoring_att":"1",
+                        "aerial_won":"1",
+                        "formation_place":"9",
+                        "accurate_pass":"19",
+                        "total_scoring_att":"3",
+                        "goals":"1"
+                    }
+                },
+                "Mesut Özil":{
+                    "player_details":{
+                        "player_id":"13756",
+                        "player_name":"Mesut Özil",
+                        "player_position_value":"4",
+                        "player_position_info":"AMC",
+                        "player_rating":"7.24"
+                    },
+                    "Match_stats":{
+                        "touches":"102",
+                        "won_contest":"2",
+                        "total_tackle":"1",
+                        "total_pass":"81",
+                        "blocked_scoring_att":"1",
+                        "formation_place":"10",
+                        "accurate_pass":"70",
+                        "total_scoring_att":"3"
+                    }
+                },
+                "Francis Coquelin":{
+                    "player_details":{
+                        "player_id":"69738",
+                        "player_name":"Francis Coquelin",
+                        "player_position_value":"5",
+                        "player_position_info":"Sub",
+                        "player_rating":"0"
+                    },
+                    "Match_stats":{
+                        "formation_place":"0"
+                    }
+                },
+                "Shkodran Mustafi":{
+                    "player_details":{
+                        "player_id":"80921",
+                        "player_name":"Shkodran Mustafi",
+                        "player_position_value":"5",
+                        "player_position_info":"Sub",
+                        "player_rating":"0"
+                    },
+                    "Match_stats":{
+                        "formation_place":"0"
+                    }
+                },
+                "Alex Iwobi":{
+                    "player_details":{
+                        "player_id":"136824",
+                        "player_name":"Alex Iwobi",
+                        "player_position_value":"5",
+                        "player_position_info":"Sub",
+                        "player_rating":"0"
+                    },
+                    "Match_stats":{
+                        "formation_place":"0"
+                    }
+                },
+                "Theo Walcott":{
+                    "player_details":{
+                        "player_id":"13796",
+                        "player_name":"Theo Walcott",
+                        "player_position_value":"5",
+                        "player_position_info":"Sub",
+                        "player_rating":"6.28"
+                    },
+                    "Match_stats":{
+                        "touches":"3",
+                        "total_pass":"2",
+                        "formation_place":"0",
+                        "accurate_pass":"1"
+                    }
+                },
+                "Aaron Ramsey":{
+                    "player_details":{
+                        "player_id":"26820",
+                        "player_name":"Aaron Ramsey",
+                        "player_position_value":"5",
+                        "player_position_info":"Sub",
+                        "player_rating":"7.31"
+                    },
+                    "Match_stats":{
+                        "touches":"20",
+                        "total_pass":"11",
+                        "aerial_won":"2",
+                        "formation_place":"0",
+                        "accurate_pass":"8",
+                        "total_scoring_att":"4",
+                        "goals":"1"
+                    }
+                },
+                "Olivier Giroud":{
+                    "player_details":{
+                        "player_id":"24444",
+                        "player_name":"Olivier Giroud",
+                        "player_position_value":"5",
+                        "player_position_info":"Sub",
+                        "player_rating":"7.53"
+                    },
+                    "Match_stats":{
+                        "touches":"10",
+                        "aerial_lost":"1",
+                        "total_pass":"8",
+                        "aerial_won":"3",
+                        "formation_place":"0",
+                        "accurate_pass":"7",
+                        "total_scoring_att":"1",
+                        "goals":"1"
+                    }
+                },
+                "David Ospina":{
+                    "player_details":{
+                        "player_id":"36745",
+                        "player_name":"David Ospina",
+                        "player_position_value":"5",
+                        "player_position_info":"Sub",
+                        "player_rating":"0"
+                    },
+                    "Match_stats":{
+                        "formation_place":"0"
+                    }
+                }
+            }
+        },
+        "14":{
+            "team_details":{
+                "team_id":"14",
+                "team_name":"Leicester",
+                "team_rating":"6.64642857142857",
+                "date":"11/08/2017"
+            },
+            "aggregate_stats":{
+                "won_corners":"4",
+                "fk_foul_lost":"12",
+                "won_contest":"5",
+                "total_tackle":"17",
+                "aerial_lost":"18",
+                "possession_percentage":"30",
+                "att_goal_high_centre":"2",
+                "att_goal_low_left":"1",
+                "total_pass":"263",
+                "total_throws":"31",
+                "total_offside":"3",
+                "shot_off_target":"3",
+                "ontarget_scoring_att":"3",
+                "aerial_won":"18",
+                "att_miss_high":"1",
+                "accurate_pass":"167",
+                "att_miss_left":"1",
+                "att_miss_right":"1",
+                "total_scoring_att":"6",
+                "goals":"3"
+            },
+            "Player_stats":{
+                "Kasper Schmeichel":{
+                    "player_details":{
+                        "player_id":"19545",
+                        "player_name":"Kasper Schmeichel",
+                        "player_position_value":"1",
+                        "player_position_info":"GK",
+                        "player_rating":"6.72"
+                    },
+                    "Match_stats":{
+                        "touches":"44",
+                        "saves":"6",
+                        "total_pass":"36",
+                        "formation_place":"1",
+                        "accurate_pass":"17"
+                    }
+                },
+                "Christian Fuchs":{
+                    "player_details":{
+                        "player_id":"12431",
+                        "player_name":"Christian Fuchs",
+                        "player_position_value":"2",
+                        "player_position_info":"DL",
+                        "player_rating":"6.17"
+                    },
+                    "Match_stats":{
+                        "touches":"61",
+                        "total_tackle":"1",
+                        "aerial_lost":"3",
+                        "total_pass":"29",
+                        "aerial_won":"2",
+                        "formation_place":"3",
+                        "accurate_pass":"17"
+                    }
+                },
+                "Wes Morgan":{
+                    "player_details":{
+                        "player_id":"8157",
+                        "player_name":"Wes Morgan",
+                        "player_position_value":"2",
+                        "player_position_info":"DC",
+                        "player_rating":"5.97"
+                    },
+                    "Match_stats":{
+                        "touches":"27",
+                        "won_contest":"1",
+                        "aerial_lost":"2",
+                        "total_pass":"16",
+                        "fouls":"4",
+                        "aerial_won":"1",
+                        "formation_place":"5",
+                        "accurate_pass":"12",
+                        "yellow_card":"1"
+                    }
+                },
+                "Danny Simpson":{
+                    "player_details":{
+                        "player_id":"23683",
+                        "player_name":"Danny Simpson",
+                        "player_position_value":"2",
+                        "player_position_info":"DR",
+                        "player_rating":"6.07"
+                    },
+                    "Match_stats":{
+                        "touches":"56",
+                        "won_contest":"1",
+                        "aerial_lost":"2",
+                        "total_pass":"28",
+                        "aerial_won":"1",
+                        "formation_place":"2",
+                        "accurate_pass":"16"
+                    }
+                },
+                "Harry Maguire":{
+                    "player_details":{
+                        "player_id":"99487",
+                        "player_name":"Harry Maguire",
+                        "player_position_value":"2",
+                        "player_position_info":"DC",
+                        "player_rating":"7.19"
+                    },
+                    "Match_stats":{
+                        "touches":"39",
+                        "won_contest":"1",
+                        "total_tackle":"2",
+                        "aerial_lost":"1",
+                        "total_pass":"25",
+                        "fouls":"1",
+                        "aerial_won":"2",
+                        "formation_place":"6",
+                        "accurate_pass":"18",
+                        "goal_assist":"1"
+                    }
+                },
+                "Wilfred Ndidi":{
+                    "player_details":{
+                        "player_id":"327683",
+                        "player_name":"Wilfred Ndidi",
+                        "player_position_value":"3",
+                        "player_position_info":"MC",
+                        "player_rating":"6.56"
+                    },
+                    "Match_stats":{
+                        "touches":"36",
+                        "total_tackle":"3",
+                        "aerial_lost":"1",
+                        "total_pass":"21",
+                        "aerial_won":"1",
+                        "formation_place":"8",
+                        "accurate_pass":"13"
+                    }
+                },
+                "Riyad Mahrez":{
+                    "player_details":{
+                        "player_id":"104749",
+                        "player_name":"Riyad Mahrez",
+                        "player_position_value":"3",
+                        "player_position_info":"MR",
+                        "player_rating":"7.36"
+                    },
+                    "Match_stats":{
+                        "touches":"63",
+                        "won_contest":"2",
+                        "total_tackle":"2",
+                        "aerial_lost":"2",
+                        "total_pass":"30",
+                        "aerial_won":"2",
+                        "formation_place":"7",
+                        "accurate_pass":"23",
+                        "total_scoring_att":"2",
+                        "goal_assist":"1"
+                    }
+                },
+                "Matty James":{
+                    "player_details":{
+                        "player_id":"75198",
+                        "player_name":"Matty James",
+                        "player_position_value":"3",
+                        "player_position_info":"MC",
+                        "player_rating":"6.84"
+                    },
+                    "Match_stats":{
+                        "touches":"26",
+                        "total_tackle":"4",
+                        "fouls":"3",
+                        "total_pass":"16",
+                        "aerial_won":"1",
+                        "formation_place":"4",
+                        "accurate_pass":"11"
+                    }
+                },
+                "Marc Albrighton":{
+                    "player_details":{
+                        "player_id":"42147",
+                        "player_name":"Marc Albrighton",
+                        "player_position_value":"3",
+                        "player_position_info":"ML",
+                        "player_rating":"6.8"
+                    },
+                    "Match_stats":{
+                        "touches":"40",
+                        "total_tackle":"1",
+                        "aerial_lost":"1",
+                        "total_pass":"18",
+                        "formation_place":"11",
+                        "accurate_pass":"14",
+                        "goal_assist":"1"
+                    }
+                },
+                "Shinji Okazaki":{
+                    "player_details":{
+                        "player_id":"26222",
+                        "player_name":"Shinji Okazaki",
+                        "player_position_value":"4",
+                        "player_position_info":"AMC",
+                        "player_rating":"7.35"
+                    },
+                    "Match_stats":{
+                        "touches":"31",
+                        "total_tackle":"1",
+                        "aerial_lost":"1",
+                        "total_pass":"21",
+                        "fouls":"3",
+                        "aerial_won":"6",
+                        "formation_place":"10",
+                        "accurate_pass":"10",
+                        "total_scoring_att":"2",
+                        "goals":"1"
+                    }
+                },
+                "Jamie Vardy":{
+                    "player_details":{
+                        "player_id":"106981",
+                        "player_name":"Jamie Vardy",
+                        "player_position_value":"4",
+                        "player_position_info":"FW",
+                        "player_rating":"8.23"
+                    },
+                    "Match_stats":{
+                        "touches":"21",
+                        "total_tackle":"1",
+                        "aerial_lost":"4",
+                        "total_pass":"11",
+                        "aerial_won":"2",
+                        "formation_place":"9",
+                        "accurate_pass":"9",
+                        "total_scoring_att":"2",
+                        "goals":"2"
+                    }
+                },
+                "Daniel Amartey":{
+                    "player_details":{
+                        "player_id":"243552",
+                        "player_name":"Daniel Amartey",
+                        "player_position_value":"5",
+                        "player_position_info":"Sub",
+                        "player_rating":"6"
+                    },
+                    "Match_stats":{
+                        "touches":"10",
+                        "total_tackle":"2",
+                        "aerial_lost":"1",
+                        "total_pass":"7",
+                        "fouls":"1",
+                        "formation_place":"0",
+                        "accurate_pass":"5"
+                    }
+                },
+                "Kelechi Iheanacho":{
+                    "player_details":{
+                        "player_id":"289253",
+                        "player_name":"Kelechi Iheanacho",
+                        "player_position_value":"5",
+                        "player_position_info":"Sub",
+                        "player_rating":"5.8"
+                    },
+                    "Match_stats":{
+                        "touches":"2",
+                        "total_pass":"2",
+                        "formation_place":"0",
+                        "accurate_pass":"1"
+                    }
+                },
+                "Demarai Gray":{
+                    "player_details":{
+                        "player_id":"136945",
+                        "player_name":"Demarai Gray",
+                        "player_position_value":"5",
+                        "player_position_info":"Sub",
+                        "player_rating":"5.99"
+                    },
+                    "Match_stats":{
+                        "touches":"3",
+                        "total_pass":"3",
+                        "formation_place":"0",
+                        "accurate_pass":"1"
+                    }
+                },
+                "Islam Slimani":{
+                    "player_details":{
+                        "player_id":"108055",
+                        "player_name":"Islam Slimani",
+                        "player_position_value":"5",
+                        "player_position_info":"Sub",
+                        "player_rating":"0"
+                    },
+                    "Match_stats":{
+                        "formation_place":"0"
+                    }
+                },
+                "Andy King":{
+                    "player_details":{
+                        "player_id":"32018",
+                        "player_name":"Andy King",
+                        "player_position_value":"5",
+                        "player_position_info":"Sub",
+                        "player_rating":"0"
+                    },
+                    "Match_stats":{
+                        "formation_place":"0"
+                    }
+                },
+                "Ben Chilwell":{
+                    "player_details":{
+                        "player_id":"299272",
+                        "player_name":"Ben Chilwell",
+                        "player_position_value":"5",
+                        "player_position_info":"Sub",
+                        "player_rating":"0"
+                    },
+                    "Match_stats":{
+                        "formation_place":"0"
+                    }
+                },
+                "Ben Hamer":{
+                    "player_details":{
+                        "player_id":"29832",
+                        "player_name":"Ben Hamer",
+                        "player_position_value":"5",
+                        "player_position_info":"Sub",
+                        "player_rating":"0"
+                    },
+                    "Match_stats":{
+                        "formation_place":"0"
+                    }
+                }
+            }
+        }
+    },
+    "1190175":{
+        "211":{
+            "team_details":{
+                "team_id":"211",
+                "team_name":"Brighton",
+                "team_rating":"6.30857142857143",
+                "date":"12/08/2017"
+            },
+            "aggregate_stats":{
+                "won_corners":"3",
+                "att_sv_low_centre":"1",
+                "won_contest":"7",
+                "total_tackle":"10",
+                "aerial_lost":"13",
+                "possession_percentage":"21.8",
+                "fk_foul_lost":"6",
+                "total_pass":"213",
+                "total_throws":"18",
+                "shot_off_target":"2",
+                "total_offside":"6",
+                "blocked_scoring_att":"2",
+                "ontarget_scoring_att":"2",
+                "aerial_won":"13",
+                "att_sv_high_centre":"1",
+                "accurate_pass":"130",
+                "att_miss_left":"1",
+                "att_miss_right":"1",
+                "total_scoring_att":"6"
+            },
+            "Player_stats":{
+                "Mat Ryan":{
+                    "player_details":{
+                        "player_id":"81523",
+                        "player_name":"Mat Ryan",
+                        "player_position_value":"1",
+                        "player_position_info":"GK",
+                        "player_rating":"6.24"
+                    },
+                    "Match_stats":{
+                        "touches":"34",
+                        "saves":"3",
+                        "total_pass":"27",
+                        "formation_place":"1",
+                        "accurate_pass":"13"
+                    }
+                },
+                "Shane Duffy":{
+                    "player_details":{
+                        "player_id":"75692",
+                        "player_name":"Shane Duffy",
+                        "player_position_value":"2",
+                        "player_position_info":"DC",
+                        "player_rating":"5.78"
+                    },
+                    "Match_stats":{
+                        "touches":"24",
+                        "total_pass":"12",
+                        "blocked_scoring_att":"1",
+                        "formation_place":"5",
+                        "accurate_pass":"8",
+                        "total_scoring_att":"1"
+                    }
+                },
+                "Bruno":{
+                    "player_details":{
+                        "player_id":"23957",
+                        "player_name":"Bruno",
+                        "player_position_value":"2",
+                        "player_position_info":"DR",
+                        "player_rating":"6.71"
+                    },
+                    "Match_stats":{
+                        "touches":"46",
+                        "won_contest":"1",
+                        "total_tackle":"1",
+                        "total_pass":"25",
+                        "formation_place":"2",
+                        "accurate_pass":"17"
+                    }
+                },
+                "Markus Suttner":{
+                    "player_details":{
+                        "player_id":"33477",
+                        "player_name":"Markus Suttner",
+                        "player_position_value":"2",
+                        "player_position_info":"DL",
+                        "player_rating":"6.51"
+                    },
+                    "Match_stats":{
+                        "touches":"41",
+                        "total_tackle":"2",
+                        "aerial_lost":"1",
+                        "total_pass":"18",
+                        "aerial_won":"1",
+                        "formation_place":"3",
+                        "accurate_pass":"12"
+                    }
+                },
+                "Lewis Dunk":{
+                    "player_details":{
+                        "player_id":"86441",
+                        "player_name":"Lewis Dunk",
+                        "player_position_value":"2",
+                        "player_position_info":"DC",
+                        "player_rating":"6.76"
+                    },
+                    "Match_stats":{
+                        "touches":"30",
+                        "own_goals":"1",
+                        "aerial_lost":"1",
+                        "total_pass":"11",
+                        "blocked_scoring_att":"1",
+                        "aerial_won":"2",
+                        "formation_place":"6",
+                        "accurate_pass":"8",
+                        "total_scoring_att":"3"
+                    }
+                },
+                "Dale Stephens":{
+                    "player_details":{
+                        "player_id":"24238",
+                        "player_name":"Dale Stephens",
+                        "player_position_value":"3",
+                        "player_position_info":"MC",
+                        "player_rating":"6.3"
+                    },
+                    "Match_stats":{
+                        "touches":"29",
+                        "aerial_lost":"1",
+                        "total_pass":"19",
+                        "fouls":"3",
+                        "aerial_won":"2",
+                        "formation_place":"4",
+                        "accurate_pass":"13"
+                    }
+                },
+                "Isaiah Brown":{
+                    "player_details":{
+                        "player_id":"127119",
+                        "player_name":"Isaiah Brown",
+                        "player_position_value":"3",
+                        "player_position_info":"ML",
+                        "player_rating":"6.5"
+                    },
+                    "Match_stats":{
+                        "touches":"12",
+                        "won_contest":"1",
+                        "total_pass":"9",
+                        "aerial_won":"1",
+                        "formation_place":"11",
+                        "accurate_pass":"7"
+                    }
+                },
+                "Davy Pröpper":{
+                    "player_details":{
+                        "player_id":"77429",
+                        "player_name":"Davy Pröpper",
+                        "player_position_value":"3",
+                        "player_position_info":"MC",
+                        "player_rating":"6.4"
+                    },
+                    "Match_stats":{
+                        "touches":"27",
+                        "won_contest":"2",
+                        "total_tackle":"1",
+                        "aerial_lost":"1",
+                        "total_pass":"15",
+                        "formation_place":"8",
+                        "accurate_pass":"8",
+                        "total_scoring_att":"2"
+                    }
+                },
+                "Solly March":{
+                    "player_details":{
+                        "player_id":"122926",
+                        "player_name":"Solly March",
+                        "player_position_value":"3",
+                        "player_position_info":"MR",
+                        "player_rating":"6.76"
+                    },
+                    "Match_stats":{
+                        "touches":"36",
+                        "won_contest":"2",
+                        "total_tackle":"2",
+                        "fouls":"1",
+                        "total_pass":"18",
+                        "formation_place":"7",
+                        "accurate_pass":"14"
+                    }
+                },
+                "Pascal Groß":{
+                    "player_details":{
+                        "player_id":"71824",
+                        "player_name":"Pascal Groß",
+                        "player_position_value":"4",
+                        "player_position_info":"FW",
+                        "player_rating":"6.03"
+                    },
+                    "Match_stats":{
+                        "touches":"43",
+                        "total_tackle":"1",
+                        "aerial_lost":"1",
+                        "total_pass":"28",
+                        "aerial_won":"1",
+                        "formation_place":"10",
+                        "accurate_pass":"14"
+                    }
+                },
+                "Tomer Hemed":{
+                    "player_details":{
+                        "player_id":"28981",
+                        "player_name":"Tomer Hemed",
+                        "player_position_value":"4",
+                        "player_position_info":"FW",
+                        "player_rating":"6.25"
+                    },
+                    "Match_stats":{
+                        "touches":"23",
+                        "aerial_lost":"7",
+                        "total_pass":"15",
+                        "aerial_won":"6",
+                        "formation_place":"9",
+                        "accurate_pass":"5"
+                    }
+                },
+                "Uwe Hünemeier":{
+                    "player_details":{
+                        "player_id":"14179",
+                        "player_name":"Uwe Hünemeier",
+                        "player_position_value":"5",
+                        "player_position_info":"Sub",
+                        "player_rating":"0"
+                    },
+                    "Match_stats":{
+                        "formation_place":"0"
+                    }
+                },
+                "Glenn Murray":{
+                    "player_details":{
+                        "player_id":"21427",
+                        "player_name":"Glenn Murray",
+                        "player_position_value":"5",
+                        "player_position_info":"Sub",
+                        "player_rating":"5.95"
+                    },
+                    "Match_stats":{
+                        "touches":"7",
+                        "won_contest":"1",
+                        "aerial_lost":"1",
+                        "total_pass":"4",
+                        "fouls":"1",
+                        "formation_place":"0",
+                        "accurate_pass":"3"
+                    }
+                },
+                "Anthony Knockaert":{
+                    "player_details":{
+                        "player_id":"86794",
+                        "player_name":"Anthony Knockaert",
+                        "player_position_value":"5",
+                        "player_position_info":"Sub",
+                        "player_rating":"6.11"
+                    },
+                    "Match_stats":{
+                        "touches":"9",
+                        "total_tackle":"1",
+                        "total_pass":"4",
+                        "formation_place":"0",
+                        "accurate_pass":"2"
+                    }
+                },
+                "Jamie Murphy":{
+                    "player_details":{
+                        "player_id":"25829",
+                        "player_name":"Jamie Murphy",
+                        "player_position_value":"5",
+                        "player_position_info":"Sub",
+                        "player_rating":"6.02"
+                    },
+                    "Match_stats":{
+                        "touches":"14",
+                        "total_tackle":"2",
+                        "fouls":"1",
+                        "total_pass":"8",
+                        "formation_place":"0",
+                        "accurate_pass":"6"
+                    }
+                },
+                "Liam Rosenior":{
+                    "player_details":{
+                        "player_id":"11869",
+                        "player_name":"Liam Rosenior",
+                        "player_position_value":"5",
+                        "player_position_info":"Sub",
+                        "player_rating":"0"
+                    },
+                    "Match_stats":{
+                        "formation_place":"0"
+                    }
+                },
+                "Steve Sidwell":{
+                    "player_details":{
+                        "player_id":"5554",
+                        "player_name":"Steve Sidwell",
+                        "player_position_value":"5",
+                        "player_position_info":"Sub",
+                        "player_rating":"0"
+                    },
+                    "Match_stats":{
+                        "formation_place":"0"
+                    }
+                },
+                "Niki Mäenpää":{
+                    "player_details":{
+                        "player_id":"35565",
+                        "player_name":"Niki Mäenpää",
+                        "player_position_value":"5",
+                        "player_position_info":"Sub",
+                        "player_rating":"0"
+                    },
+                    "Match_stats":{
+                        "formation_place":"0"
+                    }
+                }
+            }
+        },
+        "167":{
+            "team_details":{
+                "team_id":"167",
+                "team_name":"Manchester City",
+                "team_rating":"6.90285714285714",
+                "date":"12/08/2017"
+            },
+            "aggregate_stats":{
+                "fk_foul_lost":"9",
+                "won_contest":"6",
+                "possession_percentage":"78.2",
+                "total_throws":"17",
+                "blocked_scoring_att":"5",
+                "att_post_left":"1",
+                "post_scoring_att":"1",
+                "total_tackle":"10",
+                "att_miss_high_right":"2",
+                "aerial_won":"13",
+                "att_miss_right":"2",
+                "att_sv_low_centre":"2",
+                "aerial_lost":"13",
+                "accurate_pass":"691",
+                "total_pass":"768",
+                "won_corners":"10",
+                "shot_off_target":"5",
+                "ontarget_scoring_att":"4",
+                "goals":"2",
+                "total_scoring_att":"14",
+                "att_goal_low_left":"1",
+                "total_offside":"1",
+                "att_sv_low_right":"1"
+            },
+            "Player_stats":{
+                "Ederson":{
+                    "player_details":{
+                        "player_id":"121774",
+                        "player_name":"Ederson",
+                        "player_position_value":"1",
+                        "player_position_info":"GK",
+                        "player_rating":"6.64"
+                    },
+                    "Match_stats":{
+                        "good_high_claim":"1",
+                        "touches":"28",
+                        "saves":"2",
+                        "total_pass":"17",
+                        "formation_place":"1",
+                        "accurate_pass":"13"
+                    }
+                },
+                "Nicolás Otamendi":{
+                    "player_details":{
+                        "player_id":"75691",
+                        "player_name":"Nicolás Otamendi",
+                        "player_position_value":"2",
+                        "player_position_info":"DC",
+                        "player_rating":"7.46"
+                    },
+                    "Match_stats":{
+                        "touches":"111",
+                        "total_tackle":"1",
+                        "aerial_lost":"2",
+                        "total_pass":"102",
+                        "fouls":"1",
+                        "blocked_scoring_att":"1",
+                        "aerial_won":"3",
+                        "formation_place":"6",
+                        "accurate_pass":"94",
+                        "total_scoring_att":"1"
+                    }
+                },
+                "John Stones":{
+                    "player_details":{
+                        "player_id":"101374",
+                        "player_name":"John Stones",
+                        "player_position_value":"2",
+                        "player_position_info":"DC",
+                        "player_rating":"6.83"
+                    },
+                    "Match_stats":{
+                        "touches":"102",
+                        "fouls":"1",
+                        "total_pass":"99",
+                        "aerial_won":"1",
+                        "formation_place":"4",
+                        "accurate_pass":"96"
+                    }
+                },
+                "Vincent Kompany":{
+                    "player_details":{
+                        "player_id":"10136",
+                        "player_name":"Vincent Kompany",
+                        "player_position_value":"2",
+                        "player_position_info":"DC",
+                        "player_rating":"7.16"
+                    },
+                    "Match_stats":{
+                        "touches":"94",
+                        "total_tackle":"1",
+                        "aerial_lost":"1",
+                        "total_pass":"87",
+                        "aerial_won":"1",
+                        "formation_place":"5",
+                        "accurate_pass":"79"
+                    }
+                },
+                "Kyle Walker":{
+                    "player_details":{
+                        "player_id":"69778",
+                        "player_name":"Kyle Walker",
+                        "player_position_value":"3",
+                        "player_position_info":"MR",
+                        "player_rating":"7.18"
+                    },
+                    "Match_stats":{
+                        "touches":"86",
+                        "total_tackle":"1",
+                        "aerial_lost":"2",
+                        "total_pass":"67",
+                        "aerial_won":"3",
+                        "formation_place":"2",
+                        "accurate_pass":"60"
+                    }
+                },
+                "Kevin De Bruyne":{
+                    "player_details":{
+                        "player_id":"73084",
+                        "player_name":"Kevin De Bruyne",
+                        "player_position_value":"3",
+                        "player_position_info":"MC",
+                        "player_rating":"7.22"
+                    },
+                    "Match_stats":{
+                        "touches":"102",
+                        "won_contest":"1",
+                        "total_tackle":"2",
+                        "total_pass":"81",
+                        "blocked_scoring_att":"3",
+                        "aerial_won":"1",
+                        "formation_place":"7",
+                        "accurate_pass":"72",
+                        "total_scoring_att":"4"
+                    }
+                },
+                "Danilo":{
+                    "player_details":{
+                        "player_id":"88300",
+                        "player_name":"Danilo",
+                        "player_position_value":"3",
+                        "player_position_info":"ML",
+                        "player_rating":"6.39"
+                    },
+                    "Match_stats":{
+                        "touches":"56",
+                        "total_tackle":"1",
+                        "total_pass":"39",
+                        "aerial_won":"1",
+                        "formation_place":"3",
+                        "accurate_pass":"34",
+                        "total_scoring_att":"1"
+                    }
+                },
+                "David Silva":{
+                    "player_details":{
+                        "player_id":"14102",
+                        "player_name":"David Silva",
+                        "player_position_value":"3",
+                        "player_position_info":"MC",
+                        "player_rating":"8.3"
+                    },
+                    "Match_stats":{
+                        "touches":"114",
+                        "won_contest":"1",
+                        "total_tackle":"1",
+                        "fouls":"1",
+                        "man_of_the_match":"1",
+                        "total_pass":"101",
+                        "aerial_won":"1",
+                        "formation_place":"11",
+                        "accurate_pass":"94",
+                        "goal_assist":"1"
+                    }
+                },
+                "Fernandinho":{
+                    "player_details":{
+                        "player_id":"19119",
+                        "player_name":"Fernandinho",
+                        "player_position_value":"3",
+                        "player_position_info":"DMC",
+                        "player_rating":"7.02"
+                    },
+                    "Match_stats":{
+                        "touches":"111",
+                        "aerial_lost":"5",
+                        "total_pass":"99",
+                        "aerial_won":"2",
+                        "formation_place":"8",
+                        "accurate_pass":"86",
+                        "total_scoring_att":"2"
+                    }
+                },
+                "Gabriel Jesus":{
+                    "player_details":{
+                        "player_id":"279379",
+                        "player_name":"Gabriel Jesus",
+                        "player_position_value":"4",
+                        "player_position_info":"FW",
+                        "player_rating":"6.76"
+                    },
+                    "Match_stats":{
+                        "touches":"39",
+                        "won_contest":"2",
+                        "total_tackle":"1",
+                        "aerial_lost":"3",
+                        "total_pass":"25",
+                        "fouls":"2",
+                        "blocked_scoring_att":"1",
+                        "formation_place":"10",
+                        "accurate_pass":"20",
+                        "post_scoring_att":"1",
+                        "total_scoring_att":"4",
+                        "yellow_card":"1"
+                    }
+                },
+                "Sergio Agüero":{
+                    "player_details":{
+                        "player_id":"14260",
+                        "player_name":"Sergio Agüero",
+                        "player_position_value":"4",
+                        "player_position_info":"FW",
+                        "player_rating":"7.37"
+                    },
+                    "Match_stats":{
+                        "touches":"33",
+                        "won_contest":"1",
+                        "total_tackle":"1",
+                        "fouls":"1",
+                        "total_pass":"19",
+                        "goals":"1",
+                        "formation_place":"9",
+                        "accurate_pass":"13",
+                        "total_scoring_att":"2"
+                    }
+                },
+                "Eliaquim Mangala":{
+                    "player_details":{
+                        "player_id":"68852",
+                        "player_name":"Eliaquim Mangala",
+                        "player_position_value":"5",
+                        "player_position_info":"Sub",
+                        "player_rating":"0"
+                    },
+                    "Match_stats":{
+                        "formation_place":"0"
+                    }
+                },
+                "Raheem Sterling":{
+                    "player_details":{
+                        "player_id":"97692",
+                        "player_name":"Raheem Sterling",
+                        "player_position_value":"5",
+                        "player_position_info":"Sub",
+                        "player_rating":"6.03"
+                    },
+                    "Match_stats":{
+                        "touches":"8",
+                        "won_contest":"1",
+                        "fouls":"1",
+                        "total_pass":"6",
+                        "formation_place":"0",
+                        "accurate_pass":"6",
+                        "yellow_card":"1"
+                    }
+                },
+                "Bernardo Silva":{
+                    "player_details":{
+                        "player_id":"136741",
+                        "player_name":"Bernardo Silva",
+                        "player_position_value":"5",
+                        "player_position_info":"Sub",
+                        "player_rating":"6.04"
+                    },
+                    "Match_stats":{
+                        "touches":"15",
+                        "total_pass":"14",
+                        "formation_place":"0",
+                        "accurate_pass":"12"
+                    }
+                },
+                "Leroy Sané":{
+                    "player_details":{
+                        "player_id":"144711",
+                        "player_name":"Leroy Sané",
+                        "player_position_value":"5",
+                        "player_position_info":"Sub",
+                        "player_rating":"6.24"
+                    },
+                    "Match_stats":{
+                        "touches":"19",
+                        "total_tackle":"1",
+                        "fouls":"2",
+                        "total_pass":"12",
+                        "formation_place":"0",
+                        "accurate_pass":"12"
+                    }
+                },
+                "Yaya Touré":{
+                    "player_details":{
+                        "player_id":"14053",
+                        "player_name":"Yaya Touré",
+                        "player_position_value":"5",
+                        "player_position_info":"Sub",
+                        "player_rating":"0"
+                    },
+                    "Match_stats":{
+                        "formation_place":"0"
+                    }
+                },
+                "Phil Foden":{
+                    "player_details":{
+                        "player_id":"331254",
+                        "player_name":"Phil Foden",
+                        "player_position_value":"5",
+                        "player_position_info":"Sub",
+                        "player_rating":"0"
+                    },
+                    "Match_stats":{
+                        "formation_place":"0"
+                    }
+                },
+                "Claudio Bravo":{
+                    "player_details":{
+                        "player_id":"14199",
+                        "player_name":"Claudio Bravo",
+                        "player_position_value":"5",
+                        "player_position_info":"Sub",
+                        "player_rating":"0"
+                    },
+                    "Match_stats":{
+                        "formation_place":"0"
+                    }
+                }
+            }
+        }
+    },
+    "1190176":{
+        "15":{
+            "team_details":{
+                "team_id":"15",
+                "team_name":"Chelsea",
+                "team_rating":"6.39642857142857",
+                "date":"12/08/2017"
+            },
+            "aggregate_stats":{
+                "fk_foul_lost":"16",
+                "won_contest":"5",
+                "possession_percentage":"61.9",
+                "total_throws":"13",
+                "att_miss_high_left":"1",
+                "blocked_scoring_att":"7",
+                "total_scoring_att":"19",
+                "total_tackle":"10",
+                "att_miss_high_right":"2",
+                "aerial_won":"17",
+                "att_miss_right":"1",
+                "att_sv_high_left":"1",
+                "att_sv_low_centre":"2",
+                "aerial_lost":"22",
+                "total_pass":"521",
+                "won_corners":"8",
+                "shot_off_target":"6",
+                "ontarget_scoring_att":"6",
+                "goals":"2",
+                "att_sv_high_right":"1",
+                "att_miss_left":"2",
+                "att_goal_low_left":"1",
+                "total_offside":"2",
+                "accurate_pass":"446",
+                "att_goal_low_centre":"1"
+            },
+            "Player_stats":{
+                "Thibaut Courtois":{
+                    "player_details":{
+                        "player_id":"73798",
+                        "player_name":"Thibaut Courtois",
+                        "player_position_value":"1",
+                        "player_position_info":"GK",
+                        "player_rating":"5.65"
+                    },
+                    "Match_stats":{
+                        "touches":"40",
+                        "saves":"2",
+                        "total_pass":"32",
+                        "formation_place":"1",
+                        "accurate_pass":"18"
+                    }
+                },
+                "David Luiz":{
+                    "player_details":{
+                        "player_id":"27586",
+                        "player_name":"David Luiz",
+                        "player_position_value":"2",
+                        "player_position_info":"DC",
+                        "player_rating":"6.89"
+                    },
+                    "Match_stats":{
+                        "touches":"59",
+                        "aerial_lost":"5",
+                        "total_pass":"45",
+                        "fouls":"2",
+                        "aerial_won":"3",
+                        "formation_place":"5",
+                        "accurate_pass":"39",
+                        "total_scoring_att":"3",
+                        "yellow_card":"1",
+                        "goals":"1"
+                    }
+                },
+                "Antonio Rüdiger":{
+                    "player_details":{
+                        "player_id":"104010",
+                        "player_name":"Antonio Rüdiger",
+                        "player_position_value":"2",
+                        "player_position_info":"DC",
+                        "player_rating":"6.45"
+                    },
+                    "Match_stats":{
+                        "touches":"90",
+                        "aerial_lost":"4",
+                        "total_pass":"72",
+                        "fouls":"3",
+                        "blocked_scoring_att":"1",
+                        "aerial_won":"5",
+                        "formation_place":"6",
+                        "accurate_pass":"65",
+                        "total_scoring_att":"2",
+                        "yellow_card":"1"
+                    }
+                },
+                "Gary Cahill":{
+                    "player_details":{
+                        "player_id":"11981",
+                        "player_name":"Gary Cahill",
+                        "player_position_value":"2",
+                        "player_position_info":"DC",
+                        "player_rating":"5.31"
+                    },
+                    "Match_stats":{
+                        "touches":"14",
+                        "fouls":"1",
+                        "red_card":"1",
+                        "total_pass":"12",
+                        "formation_place":"4",
+                        "accurate_pass":"12"
+                    }
+                },
+                "César Azpilicueta":{
+                    "player_details":{
+                        "player_id":"25931",
+                        "player_name":"César Azpilicueta",
+                        "player_position_value":"3",
+                        "player_position_info":"DMR",
+                        "player_rating":"6.85"
+                    },
+                    "Match_stats":{
+                        "touches":"77",
+                        "total_tackle":"3",
+                        "fouls":"2",
+                        "total_pass":"58",
+                        "aerial_won":"4",
+                        "formation_place":"2",
+                        "accurate_pass":"51"
+                    }
+                },
+                "Marcos Alonso":{
+                    "player_details":{
+                        "player_id":"84008",
+                        "player_name":"Marcos Alonso",
+                        "player_position_value":"3",
+                        "player_position_info":"DML",
+                        "player_rating":"7.07"
+                    },
+                    "Match_stats":{
+                        "touches":"64",
+                        "won_contest":"1",
+                        "total_tackle":"2",
+                        "aerial_lost":"4",
+                        "total_pass":"35",
+                        "fouls":"2",
+                        "blocked_scoring_att":"2",
+                        "aerial_won":"1",
+                        "formation_place":"3",
+                        "accurate_pass":"32",
+                        "total_scoring_att":"5",
+                        "yellow_card":"1"
+                    }
+                },
+                "N'Golo Kanté":{
+                    "player_details":{
+                        "player_id":"114075",
+                        "player_name":"N'Golo Kanté",
+                        "player_position_value":"3",
+                        "player_position_info":"MC",
+                        "player_rating":"6.48"
+                    },
+                    "Match_stats":{
+                        "touches":"77",
+                        "total_tackle":"2",
+                        "total_pass":"60",
+                        "blocked_scoring_att":"3",
+                        "formation_place":"8",
+                        "accurate_pass":"54",
+                        "total_scoring_att":"4"
+                    }
+                },
+                "Cesc Fàbregas":{
+                    "player_details":{
+                        "player_id":"8040",
+                        "player_name":"Cesc Fàbregas",
+                        "player_position_value":"3",
+                        "player_position_info":"MC",
+                        "player_rating":"5.35"
+                    },
+                    "Match_stats":{
+                        "touches":"100",
+                        "won_contest":"1",
+                        "fouls":"3",
+                        "second_yellow":"1",
+                        "total_pass":"86",
+                        "aerial_won":"1",
+                        "formation_place":"7",
+                        "accurate_pass":"75",
+                        "red_card":"1"
+                    }
+                },
+                "Willian":{
+                    "player_details":{
+                        "player_id":"29463",
+                        "player_name":"Willian",
+                        "player_position_value":"4",
+                        "player_position_info":"AMC",
+                        "player_rating":"7.37"
+                    },
+                    "Match_stats":{
+                        "touches":"74",
+                        "won_contest":"2",
+                        "total_tackle":"2",
+                        "fouls":"1",
+                        "total_pass":"48",
+                        "blocked_scoring_att":"1",
+                        "aerial_won":"1",
+                        "formation_place":"10",
+                        "accurate_pass":"37",
+                        "total_scoring_att":"1",
+                        "goal_assist":"1"
+                    }
+                },
+                "Michy Batshuayi":{
+                    "player_details":{
+                        "player_id":"97803",
+                        "player_name":"Michy Batshuayi",
+                        "player_position_value":"4",
+                        "player_position_info":"FW",
+                        "player_rating":"5.71"
+                    },
+                    "Match_stats":{
+                        "touches":"23",
+                        "aerial_lost":"4",
+                        "total_pass":"18",
+                        "formation_place":"9",
+                        "accurate_pass":"12",
+                        "total_scoring_att":"1"
+                    }
+                },
+                "Jeremie Boga":{
+                    "player_details":{
+                        "player_id":"280766",
+                        "player_name":"Jeremie Boga",
+                        "player_position_value":"4",
+                        "player_position_info":"AMC",
+                        "player_rating":"6.03"
+                    },
+                    "Match_stats":{
+                        "touches":"5",
+                        "aerial_lost":"1",
+                        "total_pass":"4",
+                        "fouls":"1",
+                        "formation_place":"11",
+                        "accurate_pass":"4"
+                    }
+                },
+                "Willy Caballero":{
+                    "player_details":{
+                        "player_id":"34749",
+                        "player_name":"Willy Caballero",
+                        "player_position_value":"5",
+                        "player_position_info":"Sub",
+                        "player_rating":"0"
+                    },
+                    "Match_stats":{
+                        "formation_place":"0"
+                    }
+                },
+                "Álvaro Morata":{
+                    "player_details":{
+                        "player_id":"91213",
+                        "player_name":"Álvaro Morata",
+                        "player_position_value":"5",
+                        "player_position_info":"Sub",
+                        "player_rating":"7.64"
+                    },
+                    "Match_stats":{
+                        "touches":"14",
+                        "aerial_lost":"2",
+                        "total_pass":"5",
+                        "fouls":"1",
+                        "goals":"1",
+                        "formation_place":"0",
+                        "accurate_pass":"5",
+                        "total_scoring_att":"3",
+                        "goal_assist":"1"
+                    }
+                },
+                "Andreas Christensen":{
+                    "player_details":{
+                        "player_id":"130331",
+                        "player_name":"Andreas Christensen",
+                        "player_position_value":"5",
+                        "player_position_info":"Sub",
+                        "player_rating":"6.75"
+                    },
+                    "Match_stats":{
+                        "touches":"55",
+                        "won_contest":"1",
+                        "total_tackle":"1",
+                        "aerial_lost":"2",
+                        "total_pass":"46",
+                        "aerial_won":"2",
+                        "formation_place":"0",
+                        "accurate_pass":"42"
+                    }
+                },
+                "Kenedy":{
+                    "player_details":{
+                        "player_id":"132838",
+                        "player_name":"Kenedy",
+                        "player_position_value":"5",
+                        "player_position_info":"Sub",
+                        "player_rating":"0"
+                    },
+                    "Match_stats":{
+                        "formation_place":"0"
+                    }
+                },
+                "Charly Musonda":{
+                    "player_details":{
+                        "player_id":"303172",
+                        "player_name":"Charly Musonda",
+                        "player_position_value":"5",
+                        "player_position_info":"Sub",
+                        "player_rating":"6"
+                    },
+                    "Match_stats":{
+                        "formation_place":"0"
+                    }
+                },
+                "Kyle Scott":{
+                    "player_details":{
+                        "player_id":"342565",
+                        "player_name":"Kyle Scott",
+                        "player_position_value":"5",
+                        "player_position_info":"Sub",
+                        "player_rating":"0"
+                    },
+                    "Match_stats":{
+                        "formation_place":"0"
+                    }
+                },
+                "Fikayo Tomori":{
+                    "player_details":{
+                        "player_id":"317507",
+                        "player_name":"Fikayo Tomori",
+                        "player_position_value":"5",
+                        "player_position_info":"Sub",
+                        "player_rating":"0"
+                    },
+                    "Match_stats":{
+                        "formation_place":"0"
+                    }
+                }
+            }
+        },
+        "184":{
+            "team_details":{
+                "team_id":"184",
+                "team_name":"Burnley",
+                "team_rating":"7.05230769230769",
+                "date":"12/08/2017"
+            },
+            "aggregate_stats":{
+                "fk_foul_lost":"11",
+                "won_contest":"2",
+                "att_goal_high_right":"1",
+                "possession_percentage":"38.1",
+                "total_throws":"7",
+                "blocked_scoring_att":"1",
+                "att_post_left":"1",
+                "total_scoring_att":"10",
+                "post_scoring_att":"1",
+                "total_tackle":"8",
+                "aerial_won":"22",
+                "att_miss_right":"1",
+                "att_sv_low_centre":"1",
+                "aerial_lost":"17",
+                "total_pass":"320",
+                "won_corners":"5",
+                "shot_off_target":"4",
+                "ontarget_scoring_att":"5",
+                "goals":"3",
+                "att_miss_left":"2",
+                "att_goal_low_left":"1",
+                "total_offside":"1",
+                "att_sv_high_centre":"1",
+                "accurate_pass":"241",
+                "att_goal_high_left":"1"
+            },
+            "Player_stats":{
+                "Tom Heaton":{
+                    "player_details":{
+                        "player_id":"17708",
+                        "player_name":"Tom Heaton",
+                        "player_position_value":"1",
+                        "player_position_info":"GK",
+                        "player_rating":"6.74"
+                    },
+                    "Match_stats":{
+                        "touches":"45",
+                        "saves":"4",
+                        "total_pass":"35",
+                        "aerial_won":"1",
+                        "formation_place":"1",
+                        "accurate_pass":"16"
+                    }
+                },
+                "Matthew Lowton":{
+                    "player_details":{
+                        "player_id":"80067",
+                        "player_name":"Matthew Lowton",
+                        "player_position_value":"2",
+                        "player_position_info":"DR",
+                        "player_rating":"7.06"
+                    },
+                    "Match_stats":{
+                        "touches":"46",
+                        "total_tackle":"1",
+                        "aerial_lost":"2",
+                        "total_pass":"31",
+                        "aerial_won":"1",
+                        "formation_place":"2",
+                        "accurate_pass":"28",
+                        "goal_assist":"1"
+                    }
+                },
+                "James Tarkowski":{
+                    "player_details":{
+                        "player_id":"131464",
+                        "player_name":"James Tarkowski",
+                        "player_position_value":"2",
+                        "player_position_info":"DC",
+                        "player_rating":"7.72"
+                    },
+                    "Match_stats":{
+                        "touches":"54",
+                        "total_tackle":"1",
+                        "aerial_lost":"4",
+                        "total_pass":"31",
+                        "fouls":"1",
+                        "aerial_won":"9",
+                        "formation_place":"5",
+                        "accurate_pass":"23"
+                    }
+                },
+                "Ben Mee":{
+                    "player_details":{
+                        "player_id":"94935",
+                        "player_name":"Ben Mee",
+                        "player_position_value":"2",
+                        "player_position_info":"DC",
+                        "player_rating":"6.88"
+                    },
+                    "Match_stats":{
+                        "touches":"47",
+                        "fouls":"1",
+                        "total_pass":"30",
+                        "aerial_won":"2",
+                        "formation_place":"6",
+                        "accurate_pass":"25",
+                        "total_scoring_att":"2",
+                        "yellow_card":"1"
+                    }
+                },
+                "Stephen Ward":{
+                    "player_details":{
+                        "player_id":"15764",
+                        "player_name":"Stephen Ward",
+                        "player_position_value":"2",
+                        "player_position_info":"DL",
+                        "player_rating":"7.55"
+                    },
+                    "Match_stats":{
+                        "touches":"59",
+                        "won_contest":"1",
+                        "total_tackle":"1",
+                        "fouls":"1",
+                        "total_pass":"38",
+                        "goals":"1",
+                        "formation_place":"3",
+                        "accurate_pass":"32",
+                        "total_scoring_att":"1"
+                    }
+                },
+                "Steven Defour":{
+                    "player_details":{
+                        "player_id":"19155",
+                        "player_name":"Steven Defour",
+                        "player_position_value":"3",
+                        "player_position_info":"MC",
+                        "player_rating":"7.98"
+                    },
+                    "Match_stats":{
+                        "touches":"50",
+                        "won_contest":"1",
+                        "fouls":"1",
+                        "total_pass":"35",
+                        "formation_place":"10",
+                        "accurate_pass":"33",
+                        "goal_assist":"1"
+                    }
+                },
+                "Jack Cork":{
+                    "player_details":{
+                        "player_id":"22847",
+                        "player_name":"Jack Cork",
+                        "player_position_value":"3",
+                        "player_position_info":"MC",
+                        "player_rating":"6.66"
+                    },
+                    "Match_stats":{
+                        "touches":"51",
+                        "aerial_lost":"1",
+                        "total_pass":"40",
+                        "fouls":"1",
+                        "formation_place":"8",
+                        "accurate_pass":"33",
+                        "goal_assist":"1"
+                    }
+                },
+                "Jeff Hendrick":{
+                    "player_details":{
+                        "player_id":"86454",
+                        "player_name":"Jeff Hendrick",
+                        "player_position_value":"3",
+                        "player_position_info":"MC",
+                        "player_rating":"6.37"
+                    },
+                    "Match_stats":{
+                        "aerial_lost":"1",
+                        "touches":"38",
+                        "total_pass":"29",
+                        "formation_place":"4",
+                        "accurate_pass":"28"
+                    }
+                },
+                "Johann Berg Gudmundsson":{
+                    "player_details":{
+                        "player_id":"41868",
+                        "player_name":"Johann Berg Gudmundsson",
+                        "player_position_value":"3",
+                        "player_position_info":"MR",
+                        "player_rating":"6.7"
+                    },
+                    "Match_stats":{
+                        "touches":"19",
+                        "total_tackle":"1",
+                        "aerial_lost":"1",
+                        "total_pass":"13",
+                        "aerial_won":"1",
+                        "formation_place":"7",
+                        "accurate_pass":"6"
+                    }
+                },
+                "Robbie Brady":{
+                    "player_details":{
+                        "player_id":"93473",
+                        "player_name":"Robbie Brady",
+                        "player_position_value":"3",
+                        "player_position_info":"ML",
+                        "player_rating":"7.27"
+                    },
+                    "Match_stats":{
+                        "touches":"39",
+                        "total_tackle":"2",
+                        "aerial_lost":"2",
+                        "total_pass":"17",
+                        "fouls":"1",
+                        "blocked_scoring_att":"1",
+                        "formation_place":"11",
+                        "accurate_pass":"11",
+                        "post_scoring_att":"1",
+                        "total_scoring_att":"4",
+                        "yellow_card":"1"
+                    }
+                },
+                "Sam Vokes":{
+                    "player_details":{
+                        "player_id":"13938",
+                        "player_name":"Sam Vokes",
+                        "player_position_value":"4",
+                        "player_position_info":"FW",
+                        "player_rating":"9"
+                    },
+                    "Match_stats":{
+                        "touches":"26",
+                        "total_tackle":"1",
+                        "aerial_lost":"4",
+                        "man_of_the_match":"1",
+                        "total_pass":"15",
+                        "fouls":"4",
+                        "aerial_won":"7",
+                        "formation_place":"9",
+                        "accurate_pass":"4",
+                        "total_scoring_att":"3",
+                        "goals":"2"
+                    }
+                },
+                "Nick Pope":{
+                    "player_details":{
+                        "player_id":"105720",
+                        "player_name":"Nick Pope",
+                        "player_position_value":"5",
+                        "player_position_info":"Sub",
+                        "player_rating":"0"
+                    },
+                    "Match_stats":{
+                        "formation_place":"0"
+                    }
+                },
+                "Ashley Westwood":{
+                    "player_details":{
+                        "player_id":"79050",
+                        "player_name":"Ashley Westwood",
+                        "player_position_value":"5",
+                        "player_position_info":"Sub",
+                        "player_rating":"0"
+                    },
+                    "Match_stats":{
+                        "formation_place":"0"
+                    }
+                },
+                "Kevin Long":{
+                    "player_details":{
+                        "player_id":"74606",
+                        "player_name":"Kevin Long",
+                        "player_position_value":"5",
+                        "player_position_info":"Sub",
+                        "player_rating":"0"
+                    },
+                    "Match_stats":{
+                        "formation_place":"0"
+                    }
+                },
+                "Jonathan Walters":{
+                    "player_details":{
+                        "player_id":"3860",
+                        "player_name":"Jonathan Walters",
+                        "player_position_value":"5",
+                        "player_position_info":"Sub",
+                        "player_rating":"5.86"
+                    },
+                    "Match_stats":{
+                        "touches":"6",
+                        "aerial_lost":"1",
+                        "total_pass":"3",
+                        "aerial_won":"1",
+                        "formation_place":"0",
+                        "accurate_pass":"1"
+                    }
+                },
+                "Charlie Taylor":{
+                    "player_details":{
+                        "player_id":"107462",
+                        "player_name":"Charlie Taylor",
+                        "player_position_value":"5",
+                        "player_position_info":"Sub",
+                        "player_rating":"0"
+                    },
+                    "Match_stats":{
+                        "formation_place":"0"
+                    }
+                },
+                "Scott Arfield":{
+                    "player_details":{
+                        "player_id":"21686",
+                        "player_name":"Scott Arfield",
+                        "player_position_value":"5",
+                        "player_position_info":"Sub",
+                        "player_rating":"5.89"
+                    },
+                    "Match_stats":{
+                        "touches":"5",
+                        "total_tackle":"1",
+                        "aerial_lost":"1",
+                        "total_pass":"3",
+                        "fouls":"1",
+                        "formation_place":"0",
+                        "accurate_pass":"1",
+                        "yellow_card":"1"
+                    }
+                },
+                "Ashley Barnes":{
+                    "player_details":{
+                        "player_id":"33386",
+                        "player_name":"Ashley Barnes",
+                        "player_position_value":"5",
+                        "player_position_info":"Sub",
+                        "player_rating":"0"
+                    },
+                    "Match_stats":{
+                        "formation_place":"0"
+                    }
+                }
+            }
+        }
+    }
+}
