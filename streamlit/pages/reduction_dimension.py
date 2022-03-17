@@ -176,7 +176,7 @@ def app():
     st.markdown("On a donc consideré pour notre étude trois datasets differents afin de montrer la pertinance de la méthode de réduction:")
     st.markdown("* Dataset non réduit, suffixe _NR")
     st.markdown("* Dataset réduit avec feature selection (LogReg), suffixe _FS")
-    st.markdown("* Dataset réduit avec PCA, suffixe _NR")
+    st.markdown("* Dataset réduit avec PCA, suffixe _R")
     
     
     
