@@ -62,7 +62,7 @@ def app():
 
     X_train, X_test, y_train, y_test = train_test_split(data, target, test_size=0.25, shuffle = False, random_state=789)
     
-    st.write("Dataset après pre-processing, Number of features :{}".format(len(X_train.columns)))
+    st.write("Dataset après pre-processing, Nombre de features :{}".format(len(X_train.columns)))
     st.dataframe(X_train.head(10))
   
 

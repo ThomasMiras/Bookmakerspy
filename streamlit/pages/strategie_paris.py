@@ -231,7 +231,7 @@ def app():
 
 ############ Graph optimum
     st.subheader("Optimum")
-    st.write(r''' R = 1.1,  $\lambda = 1$, critère de Kelly ''')
+    st.write(r''' R = 1.1,  $\lambda = 0.1$, critère de Kelly ''')
 
     param_var = [1] # variation of beta
     R = 1.1

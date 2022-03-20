@@ -10,7 +10,7 @@ def app():
 
     st.markdown("* Contexte")
     st.write("Football - English Premier League 2014/15 - 2017/18")
-    st.write("Paris sportifs: mise en place d'une startégie pour tenter de battre les bookmakers")
+    st.write("Paris sportifs: mise en place d'une stratégie pour tenter de battre les bookmakers")
 
     st.markdown("* Origine des données")
     st.write("Kaggle: données concernant les matchs et les joueurs")
