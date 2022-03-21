@@ -141,11 +141,17 @@ def app():
         return color
     
     def cell_color_probability(df):
-        color = pd.DataFrame(index = df.index, columns = df.columns)
-        color['Home']['proba'] = 'background-color: #ffb482;'
-        color['Draw']['proba'] = 'background-color: #8de5a1;'
-        color['Away']['proba'] = 'background-color: #a1c9f4;'
-        return color
+      color = pd.DataFrame(index = df.index, columns = df.columns)
+      color['Home']['proba'] = 'background-color: #add8e6;'
+      if df['Home']['proba'] == max(df.loc['proba']):
+        color['Home']['proba'] = color['Home']['proba'] + 'border: dashed black;'
+      color['Draw']['proba'] = 'background-color: #90ee90;'
+      if df['Draw']['proba'] == max(df.loc['proba']):
+        color['Draw']['proba'] = color['Draw']['proba'] + 'border: dashed black;'
+      color['Away']['proba'] = 'background-color: #ffcccb;'
+      if df['Away']['proba'] == max(df.loc['proba']):
+        color['Away']['proba'] = color['Away']['proba'] + 'border: dashed black;'
+      return color
 
     
     match, scorelines, proba = match_modelisation()
@@ -168,8 +174,9 @@ def app():
     prediction = st.checkbox('afficher les prédictions')
     
     if prediction:
-        st.dataframe(scorelines.style.apply(cell_color_prediction, axis = None).format("{:20,.2f}"))
-        st.dataframe(proba.style.apply(cell_color_probability, axis = None).format("{:20,.2f}"))
+      st.dataframe(scorelines.style.apply(cell_color_prediction, axis = None).format("{:20,.2f}"))
+      st.dataframe(proba.style.apply(cell_color_probability, axis = None).format("{:20,.2f}"))
+      st.caption("Le score final est de 1-0 pour Chelsea, le résultat final est H")
     else:
         st.dataframe(scorelines.style.apply(cell_color, axis = None).format("{:20,.2f}"))
         
@@ -446,4 +453,3 @@ def app():
             st.pyplot(fig)
             
     create_dashboard_scoreline(df_poisson)
-    
