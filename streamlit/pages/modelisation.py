@@ -191,7 +191,7 @@ def app():
         
         with col5:
         
-            st.write('Dataset réduit')
+            st.write('Dataset réduit PCA')
 
             f1_score_r = [metricsR[3]['A']['f1-score'],metricsR[3]['D']['f1-score'],metricsR[3]['H']['f1-score']]
             conf_matrix_r = confusion_matrix(y_test, metricsR[2])
@@ -694,7 +694,7 @@ def app():
             st.table(pd.DataFrame(d).style.format("{:.2}"))   
 
         with col5:
-            st.caption("Dataset réduit")
+            st.caption("Dataset réduit PCA")
             fig, ax = plt.subplots()
             ax.bar(x=models,height=accuracy_r, color = sns.color_palette('pastel'))
             ax.spines['right'].set_visible(False)
@@ -788,15 +788,15 @@ def app():
 
     with col5:
             
-        st.caption("Dataset réduit")
+        st.caption("Dataset réduit PCA")
 
         x = np.arange(len(models_abbr))  # the label locations
         width = 0.2  # the width of the bars
 
         fig, ax = plt.subplots()
-        rects1 = ax.bar(x - .4, f1_r_A, width, label='Away',color='#a1c9f4')
-        rects2 = ax.bar(x , f1_r_D, width, label='Draw',color='#8de5a1')
-        rects3 = ax.bar(x + .3, f1_r_H, width, label='Home',color='#ffb482')
+        rects1 = ax.bar(x - .3, f1_r_A, width, label='Away',color='#a1c9f4')
+        rects2 = ax.bar(x - .1, f1_r_D, width, label='Draw',color='#8de5a1')
+        rects3 = ax.bar(x + .1, f1_r_H, width, label='Home',color='#ffb482')
 
         # Add some text for labels, title and custom x-axis tick labels, etc.
         ax.spines['right'].set_visible(False)
