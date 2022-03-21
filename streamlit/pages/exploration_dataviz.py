@@ -8,43 +8,13 @@ sns.set_palette("pastel")
 def app():
 
     st.header("Bookmakerspy - Exploration & dataviz")
-    st.subheader("Distribution des probabilités pour le nombre total de goals par match")
-    st.caption("Le graphe semble indiquer une distribution de Poisson")
     df = pd.read_csv('./data/df_results.csv')
     df_results = df.copy()
-    
     
     df.rename(columns={'FTR': 'Match_Result'}, inplace = 'True')
     df['Match_Result'].replace(to_replace=['H', 'D', 'A'],value=['Home', 'Draw', 'Away'], inplace = True)
 
     df['total_goal'] = df['FTHG'] + df['FTAG']
-    
-    fig = plt.figure()
-    g = sns.histplot(data=df, x='total_goal', bins=10, hue='season', kde=True, stat='density', multiple='dodge');
-    sns.despine(top=True, right=True, left=False, bottom=False)
-    g.set_xticks(range(10)) 
-
-    col1, col2 = st.columns([3, 1])
-    with col1:
-        st.pyplot(fig)
-    
-    fig1 = plt.figure()
-    g = sns.histplot(data=df, x='FTHG', bins=9, hue='season', kde=True, stat='density', multiple='dodge');
-    sns.despine(top=True, right=True, left=False, bottom=False)
-    g.set_xticks(range(10))
-    plt.xlabel('Full time home team goals')
-
-    fig2 = plt.figure()
-    g = sns.histplot(data=df, x='FTAG', bins=9, hue='season', kde=True, stat='density', multiple='dodge');
-    sns.despine(top=True, right=True, left=False, bottom=False)
-    g.set_xticks(range(10))
-    plt.xlabel('Full time away team goals')   
-
-    with col2:
-        st.pyplot(fig1)
-        st.pyplot(fig2)
-
-    
 
     st.subheader("Part des résultats de matchs (H/D/A)")
     st.caption("Jouer à domicile semble avoir un impact important sur le résultat du match")
@@ -242,13 +212,31 @@ def app():
     
     st.pyplot(f)
 
+    st.subheader("Distribution des probabilités pour le nombre total de goals par match")
+    st.caption("Le graphe semble indiquer une distribution de Poisson")
 
+    
+    fig = plt.figure()
+    g = sns.histplot(data=df, x='total_goal', bins=10, hue='season', kde=True, stat='density', multiple='dodge');
+    sns.despine(top=True, right=True, left=False, bottom=False)
+    g.set_xticks(range(10)) 
 
+    col1, col2 = st.columns([3, 1])
+    with col1:
+        st.pyplot(fig)
+    
+    fig1 = plt.figure()
+    g = sns.histplot(data=df, x='FTHG', bins=9, hue='season', kde=True, stat='density', multiple='dodge');
+    sns.despine(top=True, right=True, left=False, bottom=False)
+    g.set_xticks(range(10))
+    plt.xlabel('Full time home team goals')
 
+    fig2 = plt.figure()
+    g = sns.histplot(data=df, x='FTAG', bins=9, hue='season', kde=True, stat='density', multiple='dodge');
+    sns.despine(top=True, right=True, left=False, bottom=False)
+    g.set_xticks(range(10))
+    plt.xlabel('Full time away team goals')   
 
-
-
-
-
-
-
+    with col2:
+        st.pyplot(fig1)
+        st.pyplot(fig2)
