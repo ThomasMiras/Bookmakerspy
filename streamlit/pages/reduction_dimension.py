@@ -84,7 +84,7 @@ def app():
         rfecv.fit(X_train, y_train)
         st.write("Nombre optimum de features : {}".format(rfecv.n_features_))
         fig, ax = plt.subplots(figsize=(15,5))
-        ax.plot(rfecv.grid_scores_)
+        ax.plot(np.mean(rfecv.grid_scores_,axis=1))
         ax.set_xlabel('Nombre de features')
         ax.set_xlabel('RFECV Score')
         st.pyplot(fig);
