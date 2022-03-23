@@ -26,7 +26,7 @@ def app():
     st.markdown("* Garder une bonne performance du modèle d'apprentissage")   
     st.markdown(" Deux types de reductions sont testées:")
     st.markdown("* Feature selection (Wrapper / Logistic Regression)")
-    st.markdown("* Transforamtion de variables (PCA / LDA / Manifolds)")  
+    st.markdown("* Transformation de variables (PCA / LDA / Manifolds)")  
 
     # Chargement et affichage
     df = pd.read_csv('./data/df_results.csv', index_col = 0)

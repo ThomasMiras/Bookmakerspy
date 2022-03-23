@@ -259,7 +259,7 @@ def app():
         
 ############ Sure-Bets
     st.subheader("Sure-Bets")
-    st.write("On parie sur tous les évenements possibles sous certaines condiations, le gain du pari gagnant doit être supérieur aux pertes des deux paris perdants.")
+    st.write("On parie sur tous les évenements possibles sous certaines conditions, le gain du pari gagnant doit être supérieur aux pertes des deux paris perdants.")
     st.write(r''' $$ \frac{1}{\max_k o(A)} + \frac{1}{\max_k o(D)} + \frac{1}{\max_k o(H)} < 1 $$ ''')
     
     S_bet         = st.slider('Mise fixe:', 0.0, 50.0, 10.0)
